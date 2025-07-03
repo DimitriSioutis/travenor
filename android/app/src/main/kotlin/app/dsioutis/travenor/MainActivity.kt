@@ -1,4 +1,4 @@
-package com.dsioutis.travenor.travenor
+package app.dsioutis.travenor
 
 import io.flutter.embedding.android.FlutterActivity
 
