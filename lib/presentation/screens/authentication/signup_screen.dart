@@ -36,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
       backgroundColor: Colors.white,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state is Authenticated) {
             Navigator.of(context).pushReplacementNamed('/home');
           }
           if (state is AuthFailure) {
