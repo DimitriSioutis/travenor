@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travenor/presentation/screens/authentication/signup_screen.dart';
 import 'package:travenor/presentation/screens/main_screen.dart';
+import 'package:travenor/presentation/screens/popular_places/popular_places.dart';
+import 'package:travenor/presentation/screens/search_screen/search_screen.dart';
 import '../screens/authentication/login_screen.dart';
 import '../screens/bottom_bar_pages/home_page.dart';
 import '../screens/place_screen/place_screen.dart';
@@ -19,6 +21,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomePage());
       case '/main':
         return MaterialPageRoute(builder: (_) => const MainScreen());
+      case '/popular_places':
+        return MaterialPageRoute(builder: (_) => const PopularPlaces());
+      case '/search':
+        return MaterialPageRoute(builder: (_) => const SearchScreen());
       case '/place_details':
         return MaterialPageRoute(
           builder: (_) {

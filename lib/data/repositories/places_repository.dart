@@ -8,7 +8,7 @@ class PlacesRepository {
 
   Future<List<Place>> getPopularPlaces() async {
     try {
-      final querySnapshot = await _firestore.collection('places').where('isPopular', isEqualTo: true).limit(2).get();
+      final querySnapshot = await _firestore.collection('places').where('isPopular', isEqualTo: true).get();
       return querySnapshot.docs.map((rowPlace) => Place.fromSnapshot(rowPlace)).toList();
     } catch (e) {
       throw Exception("Failed to get popular places: ${e.toString()}");
@@ -17,10 +17,14 @@ class PlacesRepository {
 
   Future<List<Place>> searchPlaces({required String query}) async {
     try {
-      final querySnapshot = await _firestore.collection('places').where('name', isGreaterThanOrEqualTo: query).where('name', isLessThanOrEqualTo: '$query\uf8ff').limit(1).get();
-      return querySnapshot.docs.map((rowPlace) => Place.fromSnapshot(rowPlace)).toList();
+      // Search places here is bad conditon when i have too much places. But for now working
+      // final querySnapshot = await _firestore.collection('places').where('name', isGreaterThanOrEqualTo: query).where('name', isLessThanOrEqualTo: '$query\uf8ff').limit(1).get();
+      final querySnapshot = await _firestore.collection('places').get();
+      List<Place> places = querySnapshot.docs.map((rowPlace) => Place.fromSnapshot(rowPlace)).toList();
+      List<Place> filteredPlaces = places.where((place) => place.name.toLowerCase().contains(query.toLowerCase())).toList();
+      return query == '' ? places : filteredPlaces;
     } catch (e) {
-      throw Exception("Failed to search places: ${e.toString()}");
+      throw Exception("Failed to search_places places: ${e.toString()}");
     }
   }
 

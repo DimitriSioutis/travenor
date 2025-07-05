@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travenor/constants/constants.dart';
 import 'package:travenor/data/models/place.dart';
-import 'package:travenor/data/repositories/places_repository.dart';
 import 'package:travenor/logic/blocs/popular_places/popular_places_bloc.dart';
 
 import '../../../logic/blocs/auth/auth_bloc.dart';
@@ -11,7 +10,6 @@ import '../../../logic/blocs/auth/auth_state.dart';
 import '../../../logic/blocs/favorites/favorites_bloc.dart';
 import '../../../logic/blocs/favorites/favorites_event.dart';
 import '../../../logic/blocs/favorites/favorites_state.dart';
-import '../../../logic/blocs/popular_places/popular_places_event.dart';
 import '../../../logic/blocs/popular_places/popular_places_state.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,106 +17,102 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPopularPlaces()),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Explore the',
-                        style: TextStyle(
-                          fontSize: 38,
-                          color: blackText,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '\nBeautiful',
-                        style: TextStyle(
-                          fontSize: 38,
-                          color: blackText,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' world!',
-                        style: TextStyle(
-                          fontSize: 38,
-                          color: forgetPasswordColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: RichText(
+                text: TextSpan(
                   children: [
-                    Text(
-                      'Best Destination',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // TODO navigate to all popular destinations page
-                      },
-                      child: Text(
-                        'View All',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: forgetPasswordColor),
+                    TextSpan(
+                      text: 'Explore the',
+                      style: TextStyle(
+                        fontSize: 38,
+                        color: blackText,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
-                    // ListView.builder(itemBuilder: );
+                    TextSpan(
+                      text: '\nBeautiful',
+                      style: TextStyle(
+                        fontSize: 38,
+                        color: blackText,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' world!',
+                      style: TextStyle(
+                        fontSize: 38,
+                        color: forgetPasswordColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
-                builder: (context, state) {
-                  if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (state is PopularPlacesLoaded) {
-                    return SizedBox(
-                      height: 384,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        clipBehavior: Clip.none,
-                        itemCount: state.places.length,
-                        itemBuilder: (context, index) {
-                          final place = state.places[index];
-                          return Padding(
-                            padding: EdgeInsets.only(left: index == 0 ? 20 : 10.0, right: index == (state.places.length - 1) ? 20 : 10.0),
-                            child: PopularPlacesHomeCard(
-                              place: place,
-                              onTap: () {
-                                Navigator.pushNamed(context, '/place_details', arguments: place.id);
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                  if (state is PopularPlacesError) {
-                    return Text(state.error);
-                  }
-                  return SizedBox();
-                },
+            ),
+            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Best Destination',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/popular_places');
+                    },
+                    child: Text(
+                      'View All',
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: forgetPasswordColor),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
+              builder: (context, state) {
+                if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (state is PopularPlacesLoaded) {
+                  return SizedBox(
+                    height: 384,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        final place = state.places[index];
+                        return Padding(
+                          padding: EdgeInsets.only(left: index == 0 ? 20 : 10.0, right: index == 1 ? 20 : 10.0),
+                          child: PopularPlacesHomeCard(
+                            place: place,
+                            onTap: () {
+                              Navigator.pushNamed(context, '/place_details', arguments: place.id);
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+                if (state is PopularPlacesError) {
+                  return Text(state.error);
+                }
+                return SizedBox();
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -173,13 +167,14 @@ class PopularPlacesHomeCard extends StatelessWidget {
                       padding: const EdgeInsets.all(20.0),
                       child: BlocBuilder<FavoritesBloc, FavoritesState>(
                         builder: (context, favoritesState) {
+                          final authState = context.read<AuthBloc>().state;
+                          final userId = (authState is Authenticated) ? authState.user.uid : null;
+
                           bool isFavorite = false;
                           if (favoritesState is FavoritesLoaded) {
                             isFavorite = favoritesState.favoritePlaces.contains(place.id);
                           }
 
-                          final authState = context.read<AuthBloc>().state;
-                          final userId = (authState is Authenticated) ? authState.user.uid : null;
                           return InkWell(
                             onTap: () {
                               if (userId == null) {
@@ -220,11 +215,12 @@ class PopularPlacesHomeCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 14),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(14.0, 0, 14.0, 14.0),
+                padding: const EdgeInsets.all(14.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,7 +243,6 @@ class PopularPlacesHomeCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
                     Row(
                       children: [
                         SvgPicture.asset('assets/icons/location.svg'),

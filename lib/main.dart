@@ -7,6 +7,8 @@ import 'data/repositories/favorites_repository.dart';
 import 'firebase_options.dart';
 import 'logic/blocs/auth/auth_bloc.dart';
 import 'logic/blocs/favorites/favorites_bloc.dart';
+import 'logic/blocs/popular_places/popular_places_bloc.dart';
+import 'logic/blocs/popular_places/popular_places_event.dart';
 import 'logic/utility/app_bloc_observer.dart';
 import 'presentation/router/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())),
           BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepository>())),
+          BlocProvider<PopularPlacesBloc>(create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPopularPlaces())),
         ],
         child: MaterialApp(
           title: 'Travenor',

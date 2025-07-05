@@ -12,7 +12,7 @@ import 'bottom_bar_pages/calendar_page.dart';
 import 'bottom_bar_pages/home_page.dart';
 import 'bottom_bar_pages/messages_page.dart';
 import 'bottom_bar_pages/profile_page.dart';
-import 'bottom_bar_pages/search_page.dart';
+import 'search_screen/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -27,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
   static final List _pages = [
     HomePage(),
     CalendarPage(),
-    SearchPage(),
     MessagesPage(),
     ProfilePage(),
   ];
@@ -56,6 +55,7 @@ class _MainScreenState extends State<MainScreen> {
           },
           builder: (context, authState) {
             if (authState is Authenticated) {
+              // TODO maybe not the best way to do this because is refresh on every state of bottom menu bar
               context.read<FavoritesBloc>().add(LoadFavorites(authState.user.uid));
               return InkWell(
                 borderRadius: BorderRadius.circular(22),
@@ -116,7 +116,7 @@ class _MainScreenState extends State<MainScreen> {
             MenuIconButton(onTap: () => _onItemTapped(0), assetPath: 'assets/icons/home.svg', iconText: 'Home', isSelected: _isSelected(0)),
             MenuIconButton(onTap: () => _onItemTapped(1), assetPath: 'assets/icons/calendar.svg', iconText: 'Calendar', isSelected: _isSelected(1)),
             InkWell(
-              onTap: () => _onItemTapped(2),
+              onTap: () => Navigator.pushNamed(context, '/search'),
               child: Container(
                 width: 50,
                 height: 50,
@@ -135,8 +135,8 @@ class _MainScreenState extends State<MainScreen> {
                 child: Center(child: SvgPicture.asset('assets/icons/search.svg', width: 24, height: 24)),
               ),
             ),
-            MenuIconButton(onTap: () => _onItemTapped(3), assetPath: 'assets/icons/message.svg', iconText: 'Messages', isSelected: _isSelected(3)),
-            MenuIconButton(onTap: () => _onItemTapped(4), assetPath: 'assets/icons/profile.svg', iconText: 'Profile', isSelected: _isSelected(4)),
+            MenuIconButton(onTap: () => _onItemTapped(2), assetPath: 'assets/icons/message.svg', iconText: 'Messages', isSelected: _isSelected(2)),
+            MenuIconButton(onTap: () => _onItemTapped(3), assetPath: 'assets/icons/profile.svg', iconText: 'Profile', isSelected: _isSelected(3)),
           ],
         ),
       ),

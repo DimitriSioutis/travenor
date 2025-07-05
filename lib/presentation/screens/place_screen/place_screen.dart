@@ -59,7 +59,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
                               height: 44,
                               width: 44,
                               decoration: BoxDecoration(
-                                color: blackText.withValues(alpha: 0.15),
+                                color: grey.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(22),
                               ),
                               child: Center(
@@ -105,7 +105,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
                                   height: 44,
                                   width: 44,
                                   decoration: BoxDecoration(
-                                    color: blackText.withValues(alpha: 0.15),
+                                    color: grey.withValues(alpha: 0.15),
                                     borderRadius: BorderRadius.circular(22),
                                   ),
                                   child: Center(
