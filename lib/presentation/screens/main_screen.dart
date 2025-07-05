@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../constants/constants.dart';
+import '../../data/repositories/favorites_repository.dart';
 import '../../logic/blocs/auth/auth_bloc.dart';
 import '../../logic/blocs/auth/auth_event.dart';
 import '../../logic/blocs/auth/auth_state.dart';
+import '../../logic/blocs/favorites/favorites_bloc.dart';
+import '../../logic/blocs/favorites/favorites_event.dart';
 import 'bottom_bar_pages/calendar_page.dart';
 import 'bottom_bar_pages/home_page.dart';
 import 'bottom_bar_pages/messages_page.dart';
@@ -45,12 +48,20 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: BlocBuilder<AuthBloc, AuthState>(
+        title: BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is Unauthenticated) {
+              Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+            }
+          },
           builder: (context, authState) {
             if (authState is Authenticated) {
+              context.read<FavoritesBloc>().add(LoadFavorites(authState.user.uid));
               return InkWell(
                 borderRadius: BorderRadius.circular(22),
-                onTap: () => context.read<AuthBloc>().add(SignOutRequested()),
+                onTap: () {
+                  context.read<AuthBloc>().add(SignOutRequested());
+                },
                 child: Container(
                   decoration: BoxDecoration(color: lightGrey, borderRadius: BorderRadius.circular(22)),
                   padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -77,7 +88,6 @@ class _MainScreenState extends State<MainScreen> {
           },
         ),
       ),
-
       body: Container(
         color: Colors.white,
         child: _pages[_selectedIndex],

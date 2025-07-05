@@ -9,25 +9,25 @@ class AppBlocObserver extends BlocObserver {
 
   @override
   void onCreate(BlocBase bloc) {
-    // TODO: implement onCreate
+    print('${bloc.runtimeType} created');
     super.onCreate(bloc);
   }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    // TODO: implement onError
+    print('${bloc.runtimeType} error: $error');
     super.onError(bloc, error, stackTrace);
   }
 
   @override
   void onEvent(Bloc bloc, Object? event) {
-    // TODO: implement onEvent
+    print('${bloc.runtimeType} event: $event');
     super.onEvent(bloc, event);
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    // TODO: implement onTransition
+    print('${bloc.runtimeType} transition: $transition');
     super.onTransition(bloc, transition);
   }
 }

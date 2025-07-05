@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travenor/data/repositories/places_repository.dart';
 import 'constants/constants.dart';
 import 'data/repositories/auth_repository.dart';
+import 'data/repositories/favorites_repository.dart';
 import 'firebase_options.dart';
 import 'logic/blocs/auth/auth_bloc.dart';
+import 'logic/blocs/favorites/favorites_bloc.dart';
 import 'logic/utility/app_bloc_observer.dart';
 import 'presentation/router/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,10 +25,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthRepository(),
-      child: BlocProvider(
-        create: (context) => AuthBloc(authRepository: context.read<AuthRepository>()),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthRepository>(create: (context) => AuthRepository()),
+        RepositoryProvider<PlacesRepository>(create: (context) => PlacesRepository()),
+        RepositoryProvider<FavoritesRepository>(create: (context) => FavoritesRepository()),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())),
+          BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepository>())),
+        ],
         child: MaterialApp(
           title: 'Travenor',
           theme: ThemeData(
