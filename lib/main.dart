@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Travenor',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: mainColor),
+            // colorScheme: ColorScheme.fromSeed(seedColor: mainColor),
             fontFamily: 'sf',
           ),
           onGenerateRoute: appRouter.onGenerateRoute,

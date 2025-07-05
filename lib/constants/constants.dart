@@ -6,3 +6,4 @@ const Color grey = Color(0xFF7D848D);
 const Color lightBlack = Color(0xFF1B1E28);
 const Color bgColor = Color(0xFFFFFFFF);
 const Color forgetPasswordColor = Color(0xFFFF7029);
+const Color blackText = Color(0xFF1B1E28);
