@@ -20,7 +20,6 @@ class Place extends Equatable {
     required this.price,
   });
 
-  // A factory constructor to create a Place from a Firestore document
   factory Place.fromSnapshot(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Place(

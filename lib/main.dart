@@ -9,6 +9,8 @@ import 'logic/blocs/auth/auth_bloc.dart';
 import 'logic/blocs/favorites/favorites_bloc.dart';
 import 'logic/blocs/popular_places/popular_places_bloc.dart';
 import 'logic/blocs/popular_places/popular_places_event.dart';
+import 'logic/blocs/remote_config/remote_config_bloc.dart';
+import 'logic/blocs/remote_config/remote_config_event.dart';
 import 'logic/utility/app_bloc_observer.dart';
 import 'presentation/router/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';

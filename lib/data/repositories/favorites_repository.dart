@@ -12,14 +12,9 @@ class FavoritesRepository {
   }
 
   Future<void> addFavorite(String userId, String placeId) async {
-    await _firestore
-        .collection('users')
-        .doc(userId)
-        .collection('favorites')
-        .doc(placeId) // Use the placeId as the document ID
-        .set({
-          'favoritedAt': Timestamp.now(),
-        });
+    await _firestore.collection('users').doc(userId).collection('favorites').doc(placeId).set({
+      'favoritedAt': Timestamp.now(),
+    });
   }
 
   Future<void> removeFavorite(String userId, String placeId) async {

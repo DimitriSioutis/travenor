@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travenor/presentation/screens/authentication/signup_screen.dart';
+import 'package:travenor/presentation/screens/boarding_screen/boarding_screen.dart';
 import 'package:travenor/presentation/screens/main_screen.dart';
 import 'package:travenor/presentation/screens/popular_places/popular_places.dart';
 import 'package:travenor/presentation/screens/search_screen/search_screen.dart';
@@ -12,7 +13,7 @@ class AppRouter {
   Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(builder: (_) => const BoardingScreen());
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/signup':
@@ -25,6 +26,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const PopularPlaces());
       case '/search':
         return MaterialPageRoute(builder: (_) => const SearchScreen());
+
       case '/place_details':
         return MaterialPageRoute(
           builder: (_) {

@@ -173,20 +173,16 @@ class SearchPlacesGridCard extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 124,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                        image: NetworkImage(place.imageUrl),
-                        alignment: Alignment.center,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              child: Container(
+                height: 124,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: NetworkImage(place.imageUrl),
+                    alignment: Alignment.center,
+                    fit: BoxFit.cover,
                   ),
-                ],
+                ),
               ),
             ),
             Expanded(
