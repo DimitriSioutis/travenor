@@ -31,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
       create: (BuildContext context) => SearchPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(SearchPlacesRequested('')),
       lazy: false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: BlocBuilder<SearchPlacesBloc, SearchPlacesState>(
           builder: (context, state) {
             return Padding(
@@ -98,6 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       hintText: 'Search Places',
                       hintStyle: const TextStyle(color: grey),
+
                       fillColor: lightGrey,
                       filled: true,
                     ),

@@ -32,7 +32,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
       imageLocalPath: 'assets/images/board2.jpg',
     ),
     'onboard3': BoardPage(
-      title: 'People don’t take trips, trips take people',
+      title: 'People don’t take trips, trips take ',
       lastWord: 'people',
       description: 'To get the best of your adventure you just need to leave and go where you like. we are waiting for you',
       imageLocalPath: 'assets/images/board3.jpg',

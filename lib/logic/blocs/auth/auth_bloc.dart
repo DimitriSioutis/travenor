@@ -17,7 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         TravenorUser travenorUser = await _authRepository.getTravenorUser(user.uid);
         emit(Authenticated(travenorUser));
       } catch (e) {
-        emit(AuthFailure(e.toString()));
+        emit(AuthFailure('Your email or password is incorrect.'));
       }
     });
 
@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final travenorUser = await _authRepository.getTravenorUser(user.uid);
         emit(Authenticated(travenorUser));
       } catch (e) {
-        emit(AuthFailure(e.toString()));
+        emit(AuthFailure('Failed to create account.'));
       }
     });
 
