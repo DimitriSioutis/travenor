@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/data/repositories/places_repository.dart';
-import 'constants/constants.dart';
 import 'data/repositories/auth_repository.dart';
 import 'data/repositories/favorites_repository.dart';
 import 'firebase_options.dart';
@@ -9,8 +8,6 @@ import 'logic/blocs/auth/auth_bloc.dart';
 import 'logic/blocs/favorites/favorites_bloc.dart';
 import 'logic/blocs/popular_places/popular_places_bloc.dart';
 import 'logic/blocs/popular_places/popular_places_event.dart';
-import 'logic/blocs/remote_config/remote_config_bloc.dart';
-import 'logic/blocs/remote_config/remote_config_event.dart';
 import 'logic/utility/app_bloc_observer.dart';
 import 'presentation/router/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,7 +41,6 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Travenor',
           theme: ThemeData(
-            // colorScheme: ColorScheme.fromSeed(seedColor: mainColor),
             fontFamily: 'sf',
           ),
           onGenerateRoute: appRouter.onGenerateRoute,

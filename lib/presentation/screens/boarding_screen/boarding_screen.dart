@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../constants/constants.dart';
 import '../../../logic/blocs/remote_config/remote_config_bloc.dart';
 import '../../../logic/blocs/remote_config/remote_config_event.dart';
 import '../../../logic/blocs/remote_config/remote_config_state.dart';
+import '../../../widgets/general_button.dart';
 import 'boarding_page.dart';
+import 'widgets/boarding_indicator.dart';
 
 class BoardingScreen extends StatefulWidget {
   const BoardingScreen({super.key});
@@ -74,7 +75,9 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   _buildPageIndicator(pages.length, _currentPageIndex),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: MediaQuery.of(context).padding.top),
-                    child: InkWell(
+                    child: GeneralButton(
+                      buttonText: _currentPageIndex == 0 ? 'Get Started' : 'Next',
+
                       onTap: () {
                         if (_currentPageIndex == pages.length - 1) {
                           Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
@@ -85,24 +88,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
                           );
                         }
                       },
-                      borderRadius: BorderRadius.circular(14),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          _currentPageIndex == 0 ? 'Get Started' : 'Next',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                 ],
@@ -115,28 +100,18 @@ class _BoardingScreenState extends State<BoardingScreen> {
     );
   }
 
-  Widget _buildPageIndicator(int numPages, int currentIndex) {
+  Widget _buildPageIndicator(int pagesLength, int currentIndex) {
     List<Widget> list = [];
-    for (int i = 0; i < numPages; i++) {
-      list.add(i == currentIndex ? _indicator(true) : _indicator(false));
+    for (int i = 0; i < pagesLength; i++) {
+      list.add(
+        BoardingIndicator(
+          isActive: i == currentIndex ? true : false,
+        ),
+      );
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: list,
-    );
-  }
-
-  Widget _indicator(bool isActive) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeIn,
-      margin: const EdgeInsets.symmetric(horizontal: 2.0),
-      height: 7.0,
-      width: isActive ? 35.0 : 6.0,
-      decoration: BoxDecoration(
-        color: isActive ? mainColor : mainColor.withValues(alpha: 0.4),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
     );
   }
 }

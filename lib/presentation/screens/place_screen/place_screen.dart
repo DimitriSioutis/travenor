@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:readmore/readmore.dart';
 import 'package:travenor/constants/constants.dart';
-
+import 'package:travenor/widgets/general_button.dart';
 import '../../../data/repositories/places_repository.dart';
 import '../../../logic/blocs/auth/auth_bloc.dart';
 import '../../../logic/blocs/auth/auth_state.dart';
@@ -187,21 +188,17 @@ class _PlaceScreenState extends State<PlaceScreen> {
                                           ),
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          RichText(
-                                            text: TextSpan(
-                                              text: '\$${place.price}',
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: mainColor),
-                                              children: [
-                                                TextSpan(
-                                                  text: '/Person',
-                                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
-                                                ),
-                                              ],
+                                      RichText(
+                                        text: TextSpan(
+                                          text: '\$${place.price}',
+                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: mainColor),
+                                          children: [
+                                            TextSpan(
+                                              text: '/Person',
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -211,19 +208,16 @@ class _PlaceScreenState extends State<PlaceScreen> {
                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
                                   ),
                                   const SizedBox(height: 12),
-                                  RichText(
-                                    // maxLines: 4,
-                                    // overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(
-                                      text: place.description,
-                                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: grey, height: 2),
-                                      children: [
-                                        TextSpan(
-                                          text: 'Read More',
-                                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: forgetPasswordColor),
-                                        ),
-                                      ],
-                                    ),
+                                  ReadMoreText(
+                                    place.description,
+                                    trimMode: TrimMode.Line,
+                                    trimLines: 4,
+                                    trimCollapsedText: 'Show more',
+                                    trimExpandedText: 'Show less',
+                                    colorClickableText: secondaryColor,
+                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: grey, height: 2),
+                                    moreStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: secondaryColor),
+                                    // colorClickableText: secondaryColor,
                                   ),
                                 ],
                               ),
@@ -237,28 +231,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
                     alignment: Alignment.bottomCenter,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: MediaQuery.of(context).padding.bottom + 10),
-                      child: InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(14),
-                        child: Container(
-                          height: 56,
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                          decoration: BoxDecoration(
-                            color: mainColor,
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Book Now',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: GeneralButton(onTap: () {}, buttonText: 'Book Now'),
                     ),
                   ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/presentation/screens/authentication/widgets/username_textformfield.dart';
+import 'package:travenor/widgets/general_button.dart';
 
 import '../../../constants/constants.dart';
 import '../../../logic/blocs/auth/auth_bloc.dart';
@@ -89,29 +90,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: InkWell(
-                      onTap: () {
-                        _createAccountWithEmailAndPassword(context);
-                      },
-                      borderRadius: BorderRadius.circular(14),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: GeneralButton(onTap: () => _createAccountWithEmailAndPassword(context), buttonText: 'Sign Up'),
                   ),
                   const SizedBox(height: 24),
                   Row(
@@ -128,7 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         onTap: () => Navigator.of(context).pushReplacementNamed('/login'),
                         child: Text(
                           'Sign in',
-                          style: TextStyle(color: forgetPasswordColor, fontWeight: FontWeight.w500),
+                          style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],

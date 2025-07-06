@@ -10,20 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cfb3969-393e-44ee-bf47-4aac865cddf2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/logic/blocs/remote_config/remote_config_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/blocs/remote_config/remote_config_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/blocs/remote_config/remote_config_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/boarding_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/boarding_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/bottom_bar_pages/home_page/widgets/popular_places_home_card.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/main_screen/widgets/menu_icon_button.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/main_screen/widgets/profile_name_box.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/general_button.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/models/place.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/place.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/constants/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants/constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/repositories/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repositories/auth_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/repositories/favorites_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repositories/favorites_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/blocs/auth/auth_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/blocs/auth/auth_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/logic/blocs/popular_places/popular_places_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/blocs/popular_places/popular_places_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/router/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/router/app_router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication/forgot_password_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/widgets/boarding_indicator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication/signup_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/boarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/boarding_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/boarding_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/boarding_screen/boarding_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/bottom_bar_pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/bottom_bar_pages/home_page/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/main_screen/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/place_screen/place_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/place_screen/place_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/search_screen/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/search_screen/search_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -77,11 +82,11 @@
       <recent name="D:\FlutterProjects\travenor\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\bottom_bar_pages\home_page" />
+      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\main_screen" />
       <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\boarding_screen" />
       <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\search_screen" />
       <recent name="D:\FlutterProjects\travenor\lib\logic\blocs" />
-      <recent name="D:\FlutterProjects\travenor\lib\logic\blocs\popular_places\place_details" />
-      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\bottom_bar_screens" />
     </key>
   </component>
   <component name="RunManager">

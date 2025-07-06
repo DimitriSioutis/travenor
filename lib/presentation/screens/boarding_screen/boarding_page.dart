@@ -49,7 +49,7 @@ class BoardPage extends StatelessWidget {
                       text: lastWord,
                       style: TextStyle(
                         fontSize: 30,
-                        color: forgetPasswordColor,
+                        color: secondaryColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

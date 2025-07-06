@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^5.6.10
   flutter_svg: ^2.2.0
   firebase_remote_config: ^5.4.7
+  readmore: ^3.0.0
 
 dev_dependencies:
   flutter_test:

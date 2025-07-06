@@ -72,7 +72,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                         child: Text(
                           'Cancel',
-                          style: TextStyle(color: forgetPasswordColor, fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(color: secondaryColor, fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],

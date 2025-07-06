@@ -6,6 +6,7 @@ import '../../../constants/constants.dart';
 import '../../../logic/blocs/auth/auth_bloc.dart';
 import '../../../logic/blocs/auth/auth_event.dart';
 import '../../../logic/blocs/auth/auth_state.dart';
+import '../../../widgets/general_button.dart';
 import 'widgets/password_textformfield.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -79,35 +80,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           'Forget Password?',
-                          style: TextStyle(color: forgetPasswordColor, fontWeight: FontWeight.w500),
+                          style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: InkWell(
-                      onTap: () {
-                        _authenticateWithEmailAndPassword(context);
-                      },
-                      borderRadius: BorderRadius.circular(14),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                        decoration: BoxDecoration(
-                          color: mainColor,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                    child: GeneralButton(
+                      onTap: () => _authenticateWithEmailAndPassword(context),
+                      buttonText: 'Sign In',
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -125,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () => Navigator.of(context).pushReplacementNamed('/signup'),
                         child: Text(
                           'Sign up',
-                          style: TextStyle(color: forgetPasswordColor, fontWeight: FontWeight.w500),
+                          style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],
