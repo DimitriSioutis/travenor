@@ -4,6 +4,7 @@ import 'package:travenor/presentation/screens/boarding_screen/boarding_screen.da
 import 'package:travenor/presentation/screens/main_screen/main_screen.dart';
 import 'package:travenor/presentation/screens/popular_places/popular_places.dart';
 import 'package:travenor/presentation/screens/search_screen/search_screen.dart';
+import '../screens/authentication/forget_password_screen.dart';
 import '../screens/authentication/login_screen.dart';
 import '../screens/bottom_bar_pages/home_page/home_page.dart';
 import '../screens/place_screen/place_screen.dart';
@@ -18,6 +19,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case '/signup':
         return MaterialPageRoute(builder: (_) => const SignupScreen());
+      case '/forget_password':
+        return MaterialPageRoute(builder: (_) => const ForgetPasswordScreen());
       case '/home':
         return MaterialPageRoute(builder: (_) => const HomePage());
       case '/main':

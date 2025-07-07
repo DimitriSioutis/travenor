@@ -89,7 +89,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 12),
                     child: GeneralButton(onTap: () => _createAccountWithEmailAndPassword(context), buttonText: 'Sign Up'),
                   ),
                   const SizedBox(height: 24),

@@ -75,9 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: InkWell(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onTap: () {
-                          // todo navigate to forget password screen
-                        },
+                        onTap: () => Navigator.pushNamed(context, '/forget_password'),
                         child: Text(
                           'Forget Password?',
                           style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
@@ -86,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 12),
                     child: GeneralButton(
                       onTap: () => _authenticateWithEmailAndPassword(context),
                       buttonText: 'Sign In',
