@@ -33,7 +33,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
         child: BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
           builder: (context, PlaceDetailsState state) {
             if (state is PlaceDetailsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(color: mainColor));
             }
             if (state is PlaceDetailsError) {
               return Text(state.error);

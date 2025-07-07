@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
             BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
               builder: (context, state) {
                 if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator(color: mainColor));
                 }
                 if (state is PopularPlacesLoaded) {
                   return SizedBox(

@@ -141,7 +141,7 @@ class _SearchScreenState extends State<SearchScreen> {
       );
     }
     if (state is SearchPlacesLoading) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(color: mainColor));
     }
     return SizedBox();
   }

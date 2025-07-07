@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../constants/constants.dart';
 import '../../../logic/blocs/remote_config/remote_config_bloc.dart';
 import '../../../logic/blocs/remote_config/remote_config_event.dart';
 import '../../../logic/blocs/remote_config/remote_config_state.dart';
@@ -48,7 +49,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
         body: BlocBuilder<RemoteConfigBloc, RemoteConfigState>(
           builder: (context, state) {
             if (state is RemoteConfigLoading || state is RemoteConfigInitial) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(color: mainColor));
             }
 
             if (state is RemoteConfigFailure) {
