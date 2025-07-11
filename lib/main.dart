@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travenor/data/repositories/places_repository.dart';
-import 'data/repositories/auth_repository.dart';
-import 'data/repositories/favorites_repository.dart';
+import 'package:travenor/src/features/places/data/repositories/places_repository.dart';
+import 'package:travenor/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'src/features/favorites/data/repositories/favorites_repository.dart';
 import 'firebase_options.dart';
-import 'logic/blocs/auth/auth_bloc.dart';
-import 'logic/blocs/favorites/favorites_bloc.dart';
-import 'logic/blocs/popular_places/popular_places_bloc.dart';
-import 'logic/blocs/popular_places/popular_places_event.dart';
-import 'logic/utility/app_bloc_observer.dart';
-import 'presentation/router/app_router.dart';
+import 'src/features/favorites/presentation/bloc/favorites/favorites_bloc.dart';
+import 'src/features/places/presentation/bloc/popular_places/popular_places_bloc.dart';
+import 'src/features/places/presentation/bloc/popular_places/popular_places_event.dart';
+import 'src/utils/app_bloc_observer.dart';
+import 'src/routing/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'src/features/auth/domain/repositories/auth_repository.dart';
+import 'src/features/auth/presentation/bloc/auth/auth_bloc.dart';
 
 void main() async {
   Bloc.observer = AppBlocObserver();
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<AuthRepository>(create: (context) => AuthRepository()),
+        RepositoryProvider<AuthRepository>(create: (context) => AuthRepositoryImpl()),
         RepositoryProvider<PlacesRepository>(create: (context) => PlacesRepository()),
         RepositoryProvider<FavoritesRepository>(create: (context) => FavoritesRepository()),
       ],
