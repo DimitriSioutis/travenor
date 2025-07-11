@@ -28,11 +28,7 @@ class GeneralButton extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           buttonText,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
     );

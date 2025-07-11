@@ -60,11 +60,7 @@ class BoardPage extends StatelessWidget {
               Text(
                 description,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: grey,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: const TextStyle(fontSize: 16, color: grey, fontWeight: FontWeight.w400),
               ),
             ],
           ),

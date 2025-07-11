@@ -20,19 +20,6 @@ class Place extends Equatable {
     required this.price,
   });
 
-  factory Place.fromSnapshot(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return Place(
-      id: doc.id,
-      name: data['name'] ?? '',
-      location: data['location'] ?? '',
-      rating: (data['rating'] as num?)?.toDouble() ?? 0.0,
-      imageUrl: data['imageUrl'] ?? '',
-      description: data['description'] ?? '',
-      price: (data['price'] as num?)?.toInt() ?? 0,
-    );
-  }
-
   @override
   List<Object> get props => [id, name, location, rating, imageUrl, description, price];
 }

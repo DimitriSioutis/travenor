@@ -33,7 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColor,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
@@ -54,69 +54,101 @@ class _SignupScreenState extends State<SignupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Sign up now', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Please fill the details and create account',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: grey),
-                  ),
+                  _buildHeader(context),
                   const SizedBox(height: 24),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: UsernameTextFormField(usernameController: _usernameController),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: EmailTextFormField(emailController: _emailController),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: PasswordTextFormField(
-                      passwordController: _passwordController,
-                      helper: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          'Password must be 8 characters',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: grey,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  state is AuthLoading
+                      ? const Center(child: CircularProgressIndicator(color: mainColor))
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            _buildFormFields(context),
 
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 12),
-                    child: GeneralButton(onTap: () => _createAccountWithEmailAndPassword(context), buttonText: 'Sign Up'),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Already have an account',
-                        style: TextStyle(color: grey, fontWeight: FontWeight.w400),
-                      ),
-                      SizedBox(width: 10),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () => Navigator.of(context).pushReplacementNamed('/login'),
-                        child: Text(
-                          'Sign in',
-                          style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+                            const SizedBox(height: 24),
+                            _buildFooterLinks(context),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('Sign up now', style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 12),
+        Text(
+          'Please fill the details and create account',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFormFields(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: UsernameTextFormField(usernameController: _usernameController),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: EmailTextFormField(emailController: _emailController),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: PasswordTextFormField(
+            passwordController: _passwordController,
+            helper: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                'Password must be 8 characters',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: grey,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 40, 20, 12),
+          child: GeneralButton(onTap: () => _createAccountWithEmailAndPassword(context), buttonText: 'Sign Up'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFooterLinks(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Already have an account',
+          style: TextStyle(color: grey, fontWeight: FontWeight.w400),
+        ),
+        SizedBox(width: 10),
+        InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () => Navigator.of(context).pushReplacementNamed('/login'),
+          child: Text(
+            'Sign in',
+            style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ],
     );
   }
 

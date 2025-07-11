@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import '../../../../places/data/repositories/places_repository.dart';
 import '../../../../places/domain/models/place.dart';
+import '../../../../places/domain/repositories/places_repository.dart';
 import 'search_places_event.dart';
 import 'search_places_state.dart';
 

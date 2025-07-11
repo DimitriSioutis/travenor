@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../places/domain/models/place.dart';
-import '../../../places/data/repositories/places_repository.dart';
+import '../../../places/data/repositories/places_repository_impl.dart';
 import '../bloc/search_places/search_places_bloc.dart';
 import '../bloc/search_places/search_places_event.dart';
 import '../bloc/search_places/search_places_state.dart';
@@ -28,10 +28,10 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SearchPlacesBloc>(
-      create: (BuildContext context) => SearchPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(SearchPlacesRequested('')),
+      create: (BuildContext context) => SearchPlacesBloc(placesRepository: context.read<PlacesRepositoryImpl>())..add(SearchPlacesRequested('')),
       lazy: false,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: bgColor,
         body: BlocBuilder<SearchPlacesBloc, SearchPlacesState>(
           builder: (context, state) {
             return Padding(

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import '../../../../common_widgets/travenor_back_button.dart';
 import '../../../../common_widgets/general_button.dart';
 import '../../../../constants/colors.dart';
-import '../../data/repositories/auth_repository_impl.dart';
+import '../../domain/repositories/auth_repository.dart';
 import '../bloc/forget_password/forget_password_bloc.dart';
 import '../bloc/forget_password/forget_password_event.dart';
 import '../bloc/forget_password/forget_password_state.dart';
 import '../widgets/email_textformfield.dart';
+import '../widgets/forgot_password_dialog.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -29,9 +30,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColor,
       body: BlocProvider(
-        create: (context) => ForgetPasswordBloc(authRepository: context.read<AuthRepositoryImpl>()),
+        create: (context) => ForgetPasswordBloc(authRepository: context.read<AuthRepository>()),
         child: BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
           listener: (context, state) {
             if (state is ForgetPasswordSuccess) {
@@ -58,54 +59,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            height: 44,
-                            width: 44,
-                            decoration: BoxDecoration(
-                              color: grey.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(22),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: SvgPicture.asset(
-                                  'assets/icons/back.svg',
-                                  color: blackText,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: TravenorBackButton(),
                       ),
 
                       const SizedBox(height: 40),
-                      Text('Forgot Password', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600)),
-
-                      const SizedBox(height: 12),
-                      Text(
-                        'Enter your email account to reset  your password',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: grey),
-                      ),
+                      _buildHeader(context),
                       const SizedBox(height: 24),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 12.0),
-                        child: EmailTextFormField(emailController: _emailController),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 40, 0, 12),
-                        child: GeneralButton(
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<ForgetPasswordBloc>().add(ForgetPasswordRequested(_emailController.text));
-                            }
-                          },
-                          buttonText: 'Reset Password',
-                        ),
-                      ),
-                      const SizedBox(height: 24),
+                      _buildFormFields(context),
                     ],
                   ),
                 ),
@@ -116,50 +76,61 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       ),
     );
   }
-}
 
-_showInfoDialog(BuildContext context) async {
-  showDialog(
-    context: context,
-    routeSettings: RouteSettings(name: '/login'),
-    builder: (BuildContext dialogContext) {
-      return Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        alignment: Alignment.center,
-        backgroundColor: Colors.white,
-        child: InkWell(
-          onTap: () => Navigator.pop(dialogContext),
-          child: Container(
-            height: 196,
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 22,
-                  backgroundColor: secondaryColor,
-                  child: SvgPicture.asset('assets/icons/email.svg'),
-                ),
-                Text(
-                  'Check your email',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: blackText),
-                ),
-                Text(
-                  'We have send password recovery instruction to your email',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: grey),
-                ),
-              ],
-            ),
+  Widget _buildHeader(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('Forgot Password', style: Theme.of(context).textTheme.titleLarge),
+
+        const SizedBox(height: 12),
+        Text(
+          'Enter your email account to reset  your password',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFormFields(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 12.0),
+          child: EmailTextFormField(emailController: _emailController),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 40, 0, 12),
+          child: GeneralButton(
+            onTap: () => _resetPassword(context),
+
+            buttonText: 'Reset Password',
           ),
         ),
-      );
-    },
-  ).then((_) {
-    if (context.mounted) {
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      ],
+    );
+  }
+
+  void _resetPassword(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      context.read<ForgetPasswordBloc>().add(ForgetPasswordRequested(_emailController.text));
     }
-  });
+  }
+
+  _showInfoDialog(BuildContext context) async {
+    showDialog(
+      context: context,
+      routeSettings: RouteSettings(name: '/login'),
+      builder: (BuildContext dialogContext) {
+        return ForgotPasswordDialog();
+      },
+    ).then((_) {
+      if (context.mounted) {
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      }
+    });
+  }
 }

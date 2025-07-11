@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColor,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
@@ -40,11 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
           }
         },
-
         builder: (context, state) {
-          if (state is AuthLoading) {
-            return const Center(child: CircularProgressIndicator(color: mainColor));
-          }
           return Center(
             child: Form(
               key: _formKey,
@@ -52,69 +48,101 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Sign in now', style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Please sign in to continue our app',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: grey),
-                  ),
+                  _buildHeader(context),
                   const SizedBox(height: 24),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: EmailTextFormField(emailController: _emailController),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-                    child: PasswordTextFormField(passwordController: _passwordController),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20.0, bottom: 12),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () => Navigator.pushNamed(context, '/forget_password'),
-                        child: Text(
-                          'Forget Password?',
-                          style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+                  state is AuthLoading
+                      ? const Center(child: CircularProgressIndicator(color: mainColor))
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            _buildFormFields(),
+                            const SizedBox(height: 24),
+                            _buildFooterLinks(context),
+                          ],
                         ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 12),
-                    child: GeneralButton(
-                      onTap: () => _authenticateWithEmailAndPassword(context),
-                      buttonText: 'Sign In',
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: TextStyle(color: grey, fontWeight: FontWeight.w400),
-                      ),
-                      SizedBox(width: 10),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () => Navigator.of(context).pushReplacementNamed('/signup'),
-                        child: Text(
-                          'Sign up',
-                          style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('Sign in now', style: Theme.of(context).textTheme.titleLarge),
+        const SizedBox(height: 12),
+        Text(
+          'Please sign in to continue our app',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFormFields() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: EmailTextFormField(emailController: _emailController),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          child: PasswordTextFormField(passwordController: _passwordController),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 20.0, bottom: 12),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () => Navigator.pushNamed(context, '/forget_password'),
+              child: Text(
+                'Forget Password?',
+                style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 40, 20, 12),
+          child: GeneralButton(
+            onTap: () => _authenticateWithEmailAndPassword(context),
+            buttonText: 'Sign In',
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFooterLinks(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Don\'t have an account?',
+          style: TextStyle(color: grey, fontWeight: FontWeight.w400),
+        ),
+        SizedBox(width: 10),
+        TextButton(
+          // splashColor: Colors.transparent,
+          // highlightColor: Colors.transparent,
+          onPressed: () => Navigator.of(context).pushReplacementNamed('/signup'),
+          child: Text(
+            'Sign up',
+            style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ],
     );
   }
 

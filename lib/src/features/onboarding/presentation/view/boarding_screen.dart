@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travenor/src/features/onboarding/domain/repositories/remote_config_repository.dart';
 import '../../../../constants/colors.dart';
 import '../bloc/remote_config_bloc.dart';
 import '../../../../common_widgets/general_button.dart';
@@ -43,9 +44,9 @@ class _BoardingScreenState extends State<BoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RemoteConfigBloc>(
-      create: (context) => RemoteConfigBloc()..add(InitializeAndFetchConfig()),
+      create: (context) => RemoteConfigBloc(remoteConfigRepository: context.read<RemoteConfigRepository>())..add(InitializeAndFetchConfig()),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: bgColor,
         body: BlocBuilder<RemoteConfigBloc, RemoteConfigState>(
           builder: (context, state) {
             if (state is RemoteConfigLoading || state is RemoteConfigInitial) {

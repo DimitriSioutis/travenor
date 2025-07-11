@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:travenor/src/features/places/data/repositories/places_repository.dart';
+import 'package:travenor/src/features/places/data/repositories/places_repository_impl.dart';
 import '../../../domain/models/place.dart';
 import 'popular_places_event.dart';
 import 'popular_places_state.dart';
 
 class PopularPlacesBloc extends Bloc<PopularPlacesEvent, PopularPlacesState> {
-  final PlacesRepository _placesRepository;
+  final PlacesRepositoryImpl _placesRepository;
 
-  PopularPlacesBloc({required PlacesRepository placesRepository}) : _placesRepository = placesRepository, super(PopularPlacesInitial()) {
+  PopularPlacesBloc({required PlacesRepositoryImpl placesRepository}) : _placesRepository = placesRepository, super(PopularPlacesInitial()) {
     on<FetchPopularPlaces>((event, emit) async {
       emit(PopularPlacesLoading());
 

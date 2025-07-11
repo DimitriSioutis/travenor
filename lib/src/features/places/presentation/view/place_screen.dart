@@ -9,7 +9,7 @@ import '../../../auth/presentation/bloc/auth/auth_state.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_state.dart';
-import '../../data/repositories/places_repository.dart';
+import '../../data/repositories/places_repository_impl.dart';
 import '../bloc/place_details/place_details_bloc.dart';
 import '../bloc/place_details/place_details_event.dart';
 import '../bloc/place_details/place_details_state.dart';
@@ -27,9 +27,9 @@ class _PlaceScreenState extends State<PlaceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColor,
       body: BlocProvider<PlaceDetailsBloc>(
-        create: (context) => PlaceDetailsBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPlaceDetails(widget.placeId)),
+        create: (context) => PlaceDetailsBloc(placesRepository: context.read<PlacesRepositoryImpl>())..add(FetchPlaceDetails(widget.placeId)),
         child: BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
           builder: (context, PlaceDetailsState state) {
             if (state is PlaceDetailsLoading) {

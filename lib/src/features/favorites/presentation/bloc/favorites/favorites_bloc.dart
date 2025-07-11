@@ -2,26 +2,23 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 
-import '../../../data/repositories/favorites_repository.dart';
+import '../../../data/repositories/favorites_repository_impl.dart';
 import 'favorites_event.dart';
 import 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  final FavoritesRepository _favoritesRepository;
-  StreamSubscription? _favoritesSubscription;
+  final FavoritesRepositoryImpl _favoritesRepository;
 
-  FavoritesBloc({required FavoritesRepository favoritesRepository}) : _favoritesRepository = favoritesRepository, super(FavoritesInitial()) {
+  FavoritesBloc({required FavoritesRepositoryImpl favoritesRepository}) : _favoritesRepository = favoritesRepository, super(FavoritesInitial()) {
     on<LoadFavorites>(
       (event, emit) {
-        _favoritesSubscription?.cancel();
-        _favoritesSubscription = _favoritesRepository.getFavoritePlaces(event.userId).listen((Set<String> ids) {
-          add(FavoritesUpdated(ids));
-        });
+        return emit.onEach<Set<String>>(
+          _favoritesRepository.getFavoritePlaces(event.userId),
+          onData: (favoriteIds) => emit(FavoritesLoaded(favoriteIds)),
+        );
       },
     );
-    on<FavoritesUpdated>((event, emit) {
-      emit(FavoritesLoaded(event.favoritePlaces));
-    });
+
     on<AddFavorite>(
       (event, emit) {
         _favoritesRepository.addFavorite(event.userId, event.placeId);
@@ -32,10 +29,5 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         _favoritesRepository.removeFavorite(event.userId, event.placeId);
       },
     );
-  }
-  @override
-  Future<void> close() {
-    _favoritesSubscription?.cancel();
-    return super.close();
   }
 }
