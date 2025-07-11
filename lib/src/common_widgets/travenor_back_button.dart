@@ -4,10 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../constants/colors.dart';
 
 class TravenorBackButton extends StatelessWidget {
-  const TravenorBackButton({
-    super.key,
-  });
-
+  const TravenorBackButton({super.key, this.iconColor = blackText});
+  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -24,7 +22,7 @@ class TravenorBackButton extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: SvgPicture.asset(
               'assets/icons/back.svg',
-              color: blackText,
+              color: iconColor,
             ),
           ),
         ),

@@ -58,7 +58,7 @@ class FavoriteIconButton extends StatelessWidget {
             height: size,
             width: size,
             decoration: BoxDecoration(
-              color: blackText.withValues(alpha: 0.15),
+              color: grey.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(size / 2),
             ),
             child: Center(

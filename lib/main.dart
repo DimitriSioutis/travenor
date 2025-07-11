@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<AuthRepository>(create: (context) => AuthRepositoryImpl()),
-        RepositoryProvider<PlacesRepositoryImpl>(create: (context) => PlacesRepositoryImpl()),
-        RepositoryProvider<FavoritesRepositoryImpl>(create: (context) => FavoritesRepositoryImpl()),
+        RepositoryProvider<PlacesRepository>(create: (context) => PlacesRepositoryImpl()),
+        RepositoryProvider<FavoritesRepository>(create: (context) => FavoritesRepositoryImpl()),
         RepositoryProvider<RemoteConfigRepository>(create: (context) => RemoteConfigRepositoryImpl()),
       ],
       child: MultiBlocProvider(

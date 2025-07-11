@@ -12,7 +12,7 @@ class PopularPlacesBloc extends Bloc<PopularPlacesEvent, PopularPlacesState> {
       emit(PopularPlacesLoading());
 
       try {
-        List<Place> popularPlaces = await placesRepository.getPopularPlaces();
+        List<Place> popularPlaces = await _placesRepository.getPopularPlaces();
         emit(PopularPlacesLoaded(popularPlaces));
       } catch (e) {
         emit(PopularPlacesError(e.toString()));

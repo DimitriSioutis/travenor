@@ -9,6 +9,7 @@ class PlaceModel {
   final String imageUrl;
   final String description;
   final int price;
+  final List<String> images;
 
   const PlaceModel({
     required this.id,
@@ -18,10 +19,19 @@ class PlaceModel {
     required this.imageUrl,
     required this.description,
     required this.price,
+    required this.images,
   });
 
   factory PlaceModel.fromSnapshot(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+
+    List<String> images = [];
+    if (data['images'] != null) {
+      for (String image in data['images']) {
+        images.add(image);
+      }
+    }
+
     return PlaceModel(
       id: doc.id,
       name: data['name'] ?? '',
@@ -30,6 +40,7 @@ class PlaceModel {
       imageUrl: data['imageUrl'] ?? '',
       description: data['description'] ?? '',
       price: (data['price'] as num?)?.toInt() ?? 0,
+      images: images,
     );
   }
 
@@ -42,6 +53,7 @@ class PlaceModel {
       imageUrl: imageUrl,
       description: description,
       price: price,
+      images: images,
     );
   }
 }

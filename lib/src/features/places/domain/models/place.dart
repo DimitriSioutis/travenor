@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Place extends Equatable {
@@ -9,6 +8,7 @@ class Place extends Equatable {
   final String imageUrl;
   final String description;
   final int price;
+  final List<String> images;
 
   const Place({
     required this.id,
@@ -18,8 +18,9 @@ class Place extends Equatable {
     required this.imageUrl,
     required this.description,
     required this.price,
+    required this.images,
   });
 
   @override
-  List<Object> get props => [id, name, location, rating, imageUrl, description, price];
+  List<Object> get props => [id, name, location, rating, imageUrl, description, price, images];
 }

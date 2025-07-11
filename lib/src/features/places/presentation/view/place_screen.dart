@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:readmore/readmore.dart';
 import 'package:travenor/src/constants/colors.dart';
 import 'package:travenor/src/common_widgets/general_button.dart';
+import '../../../../common_widgets/travenor_back_button.dart';
 import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
-import '../../data/repositories/places_repository_impl.dart';
+import '../../domain/repositories/places_repository.dart';
 import '../bloc/place_details/place_details_bloc.dart';
 import '../bloc/place_details/place_details_event.dart';
 import '../bloc/place_details/place_details_state.dart';
+import 'package:travenor/src/features/places/domain/models/place.dart';
+
+import '../widgets/place_details_panel.dart';
 
 class PlaceScreen extends StatefulWidget {
   const PlaceScreen({super.key, required this.placeId});
@@ -19,13 +21,12 @@ class PlaceScreen extends StatefulWidget {
 }
 
 class _PlaceScreenState extends State<PlaceScreen> {
-  double boxHeight = 70.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
       body: BlocProvider<PlaceDetailsBloc>(
-        create: (context) => PlaceDetailsBloc(placesRepository: context.read<PlacesRepositoryImpl>())..add(FetchPlaceDetails(widget.placeId)),
+        create: (context) => PlaceDetailsBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPlaceDetails(widget.placeId)),
         child: BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
           builder: (context, PlaceDetailsState state) {
             if (state is PlaceDetailsLoading) {
@@ -38,149 +39,9 @@ class _PlaceScreenState extends State<PlaceScreen> {
               final place = state.place;
               return Stack(
                 children: [
-                  Container(
-                    height: (MediaQuery.of(context).size.height / 2),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(place.imageUrl), fit: BoxFit.cover),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () => Navigator.pop(context),
-                            child: Container(
-                              height: 44,
-                              width: 44,
-                              decoration: BoxDecoration(
-                                color: grey.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(22),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: SvgPicture.asset('assets/icons/back.svg'),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Details',
-                            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
-                          ),
-                          FavoriteIconButton(
-                            place: place,
-                            size: 44,
-                            iconSize: 24,
-                            favoriteIcon: Icons.bookmark,
-                            unfavoriteIcon: Icons.bookmark_border,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: (MediaQuery.of(context).size.height / 2) + boxHeight,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.elliptical(200, 30),
-                          topRight: Radius.elliptical(200, 30),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 20),
-                            Center(
-                              child: SvgPicture.asset(
-                                'assets/icons/swipe.svg',
-                                height: 6,
-                                width: 35,
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            Text(
-                              place.name,
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: blackText),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              place.location,
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: grey),
-                            ),
-                            const SizedBox(height: 24),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    SvgPicture.asset('assets/icons/location.svg'),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      place.location,
-                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.star, color: Color(0xffFFD336), size: 15),
-                                    Text(
-                                      '${place.rating}',
-                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: blackText),
-                                    ),
-                                  ],
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: '\$${place.price}',
-                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: mainColor),
-                                    children: [
-                                      TextSpan(
-                                        text: '/Person',
-                                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 24),
-                            Text(
-                              'About Destination',
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
-                            ),
-                            const SizedBox(height: 12),
-                            SizedBox(
-                              height: 150,
-                              child: SingleChildScrollView(
-                                child: ReadMoreText(
-                                  place.description,
-                                  trimMode: TrimMode.Line,
-                                  trimLines: 1,
-                                  trimCollapsedText: 'Show more',
-                                  trimExpandedText: 'Show less',
-                                  colorClickableText: secondaryColor,
-                                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: grey, height: 2),
-                                  moreStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: secondaryColor),
-                                  // colorClickableText: secondaryColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildBackgroundImage(context, place),
+                  _buildTopBar(context, place),
+                  PlaceDetailsPanel(place: place),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
@@ -194,6 +55,41 @@ class _PlaceScreenState extends State<PlaceScreen> {
             return const SizedBox();
           },
         ),
+      ),
+    );
+  }
+
+  Align _buildTopBar(BuildContext context, Place place) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TravenorBackButton(iconColor: Colors.white),
+            Text(
+              'Details',
+              style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            FavoriteIconButton(
+              place: place,
+              size: 44,
+              iconSize: 24,
+              favoriteIcon: Icons.bookmark,
+              unfavoriteIcon: Icons.bookmark_border,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _buildBackgroundImage(BuildContext context, Place place) {
+    return Container(
+      height: (MediaQuery.of(context).size.height / 2),
+      decoration: BoxDecoration(
+        image: DecorationImage(image: NetworkImage(place.imageUrl), fit: BoxFit.cover),
       ),
     );
   }
