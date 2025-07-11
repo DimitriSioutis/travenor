@@ -22,7 +22,6 @@ class ProfileNameBox extends StatelessWidget {
       },
       builder: (context, authState) {
         if (authState is Authenticated) {
-          context.read<FavoritesBloc>().add(LoadFavorites(authState.user.uid));
           return InkWell(
             borderRadius: BorderRadius.circular(22),
             onTap: () {

@@ -7,6 +7,7 @@ import '../../../auth/presentation/bloc/auth/auth_state.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_state.dart';
+import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
 import '../../domain/models/place.dart';
 import '../bloc/popular_places/popular_places_bloc.dart';
 import '../bloc/popular_places/popular_places_state.dart';
@@ -138,50 +139,12 @@ class PopularPlacesGridCard extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: BlocBuilder<FavoritesBloc, FavoritesState>(
-                        builder: (context, favoritesState) {
-                          bool isFavorite = false;
-                          if (favoritesState is FavoritesLoaded) {
-                            isFavorite = favoritesState.favoritePlaces.contains(place.id);
-                          }
-
-                          final authState = context.read<AuthBloc>().state;
-                          final userId = (authState is Authenticated) ? authState.user.uid : null;
-                          return InkWell(
-                            onTap: () {
-                              if (userId == null) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Please log in to add favorites')),
-                                );
-                                return;
-                              }
-                              if (isFavorite) {
-                                context.read<FavoritesBloc>().add(
-                                  RemoveFavorite(userId: userId, placeId: place.id),
-                                );
-                              } else {
-                                context.read<FavoritesBloc>().add(
-                                  AddFavorite(userId: userId, placeId: place.id),
-                                );
-                              }
-                            },
-                            child: Container(
-                              height: 24,
-                              width: 24,
-                              decoration: BoxDecoration(
-                                color: blackText.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: Colors.white,
-                                  size: 14,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                      child: FavoriteIconButton(
+                        place: place,
+                        iconSize: 14,
+                        favoriteIcon: Icons.favorite,
+                        unfavoriteIcon: Icons.favorite_border,
+                        size: 24,
                       ),
                     ),
                   ),

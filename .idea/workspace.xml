@@ -10,35 +10,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cfb3969-393e-44ee-bf47-4aac865cddf2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/common_widgets/travenor_back_button.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/forgot_password_dialog.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/favorites/domain/repositories/favorites_repository.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/onboarding/data/repositories/remote_config_repository_impl.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/onboarding/domain/repositories/remote_config_repository.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/places/data/models/place_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/features/places/domain/repositories/places_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/features/favorites/presentation/widgets/favorite_icon_button.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/center_button.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/bookmark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/bookmark_filled.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/common_widgets/general_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/common_widgets/general_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/domain/repositories/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/domain/repositories/auth_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/forget_password_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/forget_password_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/login_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/signup_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/favorites/data/repositories/favorites_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/favorites/data/repositories/favorites_repository_impl.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/favorites/presentation/bloc/favorites/favorites_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/favorites/presentation/bloc/favorites/favorites_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/main_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/remote_config_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/bloc/remote_config_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/view/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/view/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/popular_places_home_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/popular_places_horizontal_list_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/profile_name_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/profile_name_box.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/boarding_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/places/data/repositories/places_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/data/repositories/places_repository_impl.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/places/domain/models/place.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/domain/models/place.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/bloc/place_details/place_details_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/bloc/place_details/place_details_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/bloc/popular_places/popular_places_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/bloc/popular_places/popular_places_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/view/place_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/view/place_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/view/popular_places.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/view/popular_places.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/search/presentation/bloc/search_places/search_places_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/search/presentation/bloc/search_places/search_places_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/features/search/presentation/view/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/search/presentation/view/search_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/utils/error_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/utils/error_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/routing/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/routing/app_router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/utils/app_bloc_observer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/utils/app_bloc_observer.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,11 +82,11 @@
       <recent name="D:\FlutterProjects\travenor\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\home\presentation\view" />
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\onboarding\presentation\widgets" />
       <recent name="D:\FlutterProjects\travenor\lib\src\features\favorites\presentation" />
       <recent name="D:\FlutterProjects\travenor\lib\src\features" />
       <recent name="D:\FlutterProjects\travenor\lib\src\utils" />
-      <recent name="D:\FlutterProjects\travenor\lib\src\features\places\presentation\view" />
-      <recent name="D:\FlutterProjects\travenor\lib\src\features\search\presentation\view" />
     </key>
   </component>
   <component name="RunManager">

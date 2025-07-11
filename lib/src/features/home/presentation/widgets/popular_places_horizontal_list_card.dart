@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travenor/src/features/places/domain/models/place.dart';
 import '../../../../constants/colors.dart';
-import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
-import '../../../auth/presentation/bloc/auth/auth_state.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_state.dart';
+import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
 
-class PopularPlacesHomeCard extends StatelessWidget {
-  const PopularPlacesHomeCard({super.key, required this.place, required this.onTap});
+class PopularPlacesHorizontalListCard extends StatelessWidget {
+  const PopularPlacesHorizontalListCard({super.key, required this.place, required this.onTap});
 
   final Place place;
   final VoidCallback onTap;
@@ -55,50 +50,12 @@ class PopularPlacesHomeCard extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: BlocBuilder<FavoritesBloc, FavoritesState>(
-                        builder: (context, favoritesState) {
-                          final authState = context.read<AuthBloc>().state;
-                          final userId = (authState is Authenticated) ? authState.user.uid : null;
-
-                          bool isFavorite = false;
-                          if (favoritesState is FavoritesLoaded) {
-                            isFavorite = favoritesState.favoritePlaces.contains(place.id);
-                          }
-
-                          return InkWell(
-                            onTap: () {
-                              if (userId == null) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Please log in to add favorites')),
-                                );
-                                return;
-                              }
-                              if (isFavorite) {
-                                context.read<FavoritesBloc>().add(
-                                  RemoveFavorite(userId: userId, placeId: place.id),
-                                );
-                              } else {
-                                context.read<FavoritesBloc>().add(
-                                  AddFavorite(userId: userId, placeId: place.id),
-                                );
-                              }
-                            },
-                            child: Container(
-                              height: 34,
-                              width: 34,
-                              decoration: BoxDecoration(
-                                color: blackText.withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(22),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: SvgPicture.asset(isFavorite ? 'assets/icons/bookmark_filled.svg' : 'assets/icons/bookmark.svg'),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                      child: FavoriteIconButton(
+                        place: place,
+                        size: 34,
+                        iconSize: 20,
+                        favoriteIcon: Icons.bookmark,
+                        unfavoriteIcon: Icons.bookmark_border,
                       ),
                     ),
                   ),

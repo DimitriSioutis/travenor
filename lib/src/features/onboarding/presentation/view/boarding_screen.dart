@@ -6,7 +6,7 @@ import '../bloc/remote_config_bloc.dart';
 import '../../../../common_widgets/general_button.dart';
 import '../bloc/remote_config_event.dart';
 import '../bloc/remote_config_state.dart';
-import 'boarding_page.dart';
+import '../widgets/boarding_page.dart';
 import '../widgets/boarding_indicator.dart';
 
 class BoardingScreen extends StatefulWidget {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/constants/colors.dart';
+import 'package:travenor/src/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:travenor/src/features/onboarding/data/repositories/remote_config_repository_impl.dart';
 import 'package:travenor/src/features/places/data/repositories/places_repository_impl.dart';
 import 'package:travenor/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:travenor/src/features/places/domain/repositories/places_repository.dart';
 import 'src/features/favorites/data/repositories/favorites_repository_impl.dart';
 import 'firebase_options.dart';
 import 'src/features/favorites/presentation/bloc/favorites/favorites_bloc.dart';
@@ -40,8 +42,8 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())),
-          BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepositoryImpl>())),
-          BlocProvider<PopularPlacesBloc>(create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepositoryImpl>())..add(FetchPopularPlaces())),
+          BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepository>())),
+          BlocProvider<PopularPlacesBloc>(create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPopularPlaces())),
         ],
         child: MaterialApp(
           title: 'Travenor',

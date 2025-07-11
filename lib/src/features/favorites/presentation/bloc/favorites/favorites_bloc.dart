@@ -1,15 +1,12 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-
-import '../../../data/repositories/favorites_repository_impl.dart';
+import '../../../domain/repositories/favorites_repository.dart';
 import 'favorites_event.dart';
 import 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  final FavoritesRepositoryImpl _favoritesRepository;
+  final FavoritesRepository _favoritesRepository;
 
-  FavoritesBloc({required FavoritesRepositoryImpl favoritesRepository}) : _favoritesRepository = favoritesRepository, super(FavoritesInitial()) {
+  FavoritesBloc({required FavoritesRepository favoritesRepository}) : _favoritesRepository = favoritesRepository, super(FavoritesInitial()) {
     on<LoadFavorites>(
       (event, emit) {
         return emit.onEach<Set<String>>(

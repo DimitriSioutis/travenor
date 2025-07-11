@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:travenor/src/features/onboarding/presentation/view/boarding_screen.dart';
-import 'package:travenor/src/features/home/presentation/main_screen.dart';
+import 'package:travenor/src/features/home/presentation/view/main_screen.dart';
 import 'package:travenor/src/features/places/presentation/view/popular_places.dart';
 import 'package:travenor/src/features/search/presentation/view/search_screen.dart';
-import '../features/home/presentation/home_page.dart';
+import '../features/home/presentation/view/home_page.dart';
 import '../features/places/presentation/view/place_screen.dart';
 import '../utils/error_screen.dart';
 import '../features/auth/presentation/view/forget_password_screen.dart';

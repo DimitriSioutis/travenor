@@ -4,11 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:readmore/readmore.dart';
 import 'package:travenor/src/constants/colors.dart';
 import 'package:travenor/src/common_widgets/general_button.dart';
-import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
-import '../../../auth/presentation/bloc/auth/auth_state.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_state.dart';
+import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
 import '../../data/repositories/places_repository_impl.dart';
 import '../bloc/place_details/place_details_bloc.dart';
 import '../bloc/place_details/place_details_event.dart';
@@ -76,49 +72,12 @@ class _PlaceScreenState extends State<PlaceScreen> {
                             'Details',
                             style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
                           ),
-                          BlocBuilder<FavoritesBloc, FavoritesState>(
-                            builder: (context, favoritesState) {
-                              bool isFavorite = false;
-                              if (favoritesState is FavoritesLoaded) {
-                                isFavorite = favoritesState.favoritePlaces.contains(place.id);
-                              }
-
-                              final authState = context.read<AuthBloc>().state;
-                              final userId = (authState is Authenticated) ? authState.user.uid : null;
-                              return InkWell(
-                                onTap: () {
-                                  if (userId == null) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Please log in to add favorites')),
-                                    );
-                                    return;
-                                  }
-                                  if (isFavorite) {
-                                    context.read<FavoritesBloc>().add(
-                                      RemoveFavorite(userId: userId, placeId: place.id),
-                                    );
-                                  } else {
-                                    context.read<FavoritesBloc>().add(
-                                      AddFavorite(userId: userId, placeId: place.id),
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  height: 44,
-                                  width: 44,
-                                  decoration: BoxDecoration(
-                                    color: grey.withValues(alpha: 0.15),
-                                    borderRadius: BorderRadius.circular(22),
-                                  ),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: SvgPicture.asset(isFavorite ? 'assets/icons/bookmark_filled.svg' : 'assets/icons/bookmark.svg'),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
+                          FavoriteIconButton(
+                            place: place,
+                            size: 44,
+                            iconSize: 24,
+                            favoriteIcon: Icons.bookmark,
+                            unfavoriteIcon: Icons.bookmark_border,
                           ),
                         ],
                       ),

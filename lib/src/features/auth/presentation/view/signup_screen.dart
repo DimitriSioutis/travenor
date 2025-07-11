@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/common_widgets/general_button.dart';
 import '../../../../constants/colors.dart';
+import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
+import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/auth/auth_event.dart';
 import '../bloc/auth/auth_state.dart';
@@ -37,6 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
+            context.read<FavoritesBloc>().add(LoadFavorites(state.user.uid));
             Navigator.of(context).pushReplacementNamed('/main');
           }
           if (state is AuthFailure) {
