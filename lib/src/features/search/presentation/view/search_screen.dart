@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../common_widgets/travenor_back_button.dart';
 import '../../../../constants/colors.dart';
-import '../../../places/domain/models/place.dart';
 import '../../../places/domain/repositories/places_repository.dart';
 import '../bloc/search_places/search_places_bloc.dart';
 import '../bloc/search_places/search_places_event.dart';
@@ -30,7 +29,6 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return BlocProvider<SearchPlacesBloc>(
       create: (BuildContext context) => SearchPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(SearchPlacesRequested('')),
-      lazy: false,
       child: Scaffold(
         backgroundColor: bgColor,
         body: BlocBuilder<SearchPlacesBloc, SearchPlacesState>(
@@ -40,52 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TravenorBackButton(),
-                      Text(
-                        'Search',
-                        style: TextStyle(color: blackText, fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          _searchController.clear();
-                          context.read<SearchPlacesBloc>().add(SearchPlacesRequested(''));
-                        },
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(color: secondaryColor, fontSize: 16, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _buildTopBar(context),
                   SizedBox(height: 20),
-                  TextFormField(
-                    controller: _searchController,
-                    onChanged: (value) {
-                      context.read<SearchPlacesBloc>().add(SearchPlacesRequested(value));
-                    },
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: SvgPicture.asset(
-                          'assets/icons/search.svg',
-                          color: grey,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(14)),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: 'Search Places',
-                      hintStyle: const TextStyle(color: grey),
-
-                      fillColor: lightGrey,
-                      filled: true,
-                    ),
-                  ),
+                  _buildSearchTextField(context),
                   SizedBox(height: 20),
                   Text(
                     'All Popular Places',
@@ -99,6 +54,57 @@ class _SearchScreenState extends State<SearchScreen> {
           },
         ),
       ),
+    );
+  }
+
+  TextFormField _buildSearchTextField(BuildContext context) {
+    return TextFormField(
+      controller: _searchController,
+      onChanged: (value) {
+        context.read<SearchPlacesBloc>().add(SearchPlacesRequested(value));
+      },
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SvgPicture.asset(
+            'assets/icons/search.svg',
+            color: grey,
+          ),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(14)),
+          borderSide: BorderSide.none,
+        ),
+        hintText: 'Search Places',
+        hintStyle: const TextStyle(color: grey),
+
+        fillColor: lightGrey,
+        filled: true,
+      ),
+    );
+  }
+
+  Row _buildTopBar(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TravenorBackButton(),
+        Text(
+          'Search',
+          style: TextStyle(color: blackText, fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        InkWell(
+          onTap: () {
+            _searchController.clear();
+            context.read<SearchPlacesBloc>().add(SearchPlacesRequested(''));
+          },
+          child: Text(
+            'Cancel',
+            style: TextStyle(color: secondaryColor, fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ],
     );
   }
 

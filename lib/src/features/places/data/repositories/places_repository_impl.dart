@@ -21,12 +21,9 @@ class PlacesRepositoryImpl implements PlacesRepository {
   @override
   Future<List<Place>> searchPlaces({required String query}) async {
     try {
-      // Search places here is bad condition when i have too much places. But for now working
-      // final querySnapshot = await _firestore.collection('places').where('name', isGreaterThanOrEqualTo: query).where('name', isLessThanOrEqualTo: '$query\uf8ff').limit(1).get();
-      final querySnapshot = await _firestore.collection('places').get();
+      final querySnapshot = await _firestore.collection('places').where('name', isGreaterThanOrEqualTo: query).where('name', isLessThanOrEqualTo: '$query\uf8ff').limit(20).get();
       List<Place> places = querySnapshot.docs.map((rowPlace) => PlaceModel.fromSnapshot(rowPlace).toDomain()).toList();
-      List<Place> filteredPlaces = places.where((place) => place.name.toLowerCase().contains(query.toLowerCase())).toList();
-      return query == '' ? places : filteredPlaces;
+      return places;
     } catch (e) {
       throw Exception("Failed to search_places places: ${e.toString()}");
     }
