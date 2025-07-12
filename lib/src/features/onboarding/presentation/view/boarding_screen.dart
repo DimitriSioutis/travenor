@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travenor/src/features/onboarding/domain/models/onboarding_page.dart';
 import 'package:travenor/src/features/onboarding/domain/repositories/remote_config_repository.dart';
 import '../../../../constants/colors.dart';
 import '../bloc/remote_config_bloc.dart';
@@ -26,7 +27,12 @@ class _BoardingScreenState extends State<BoardingScreen> {
       create: (context) => RemoteConfigBloc(remoteConfigRepository: context.read<RemoteConfigRepository>())..add(InitializeAndFetchConfig()),
       child: Scaffold(
         backgroundColor: bgColor,
-        body: BlocBuilder<RemoteConfigBloc, RemoteConfigState>(
+        body: BlocConsumer<RemoteConfigBloc, RemoteConfigState>(
+          listener: (context, state) {
+            if (state is RemoteConfigSuccess) {
+              if (state.infoList.isEmpty) Navigator.pushReplacementNamed(context, '/login');
+            }
+          },
           builder: (context, state) {
             if (state is RemoteConfigLoading || state is RemoteConfigInitial) {
               return const Center(child: CircularProgressIndicator(color: mainColor));
@@ -37,27 +43,31 @@ class _BoardingScreenState extends State<BoardingScreen> {
             }
 
             if (state is RemoteConfigSuccess) {
-              final List<Widget> pages = state.onboardPages;
+              List<OnboardingPageInfo> infoList = state.infoList;
               return Column(
                 children: [
                   Expanded(
-                    child: PageView(
+                    child: PageView.builder(
                       controller: _pageController,
-                      children: pages,
+                      itemCount: state.infoList.length,
                       onPageChanged: (value) {
                         setState(() {
                           _currentPageIndex = value;
                         });
                       },
+                      itemBuilder: (context, index) {
+                        final info = state.infoList[index];
+                        return BoardPage(info: info);
+                      },
                     ),
                   ),
-                  _buildPageIndicator(pages.length, _currentPageIndex),
+                  _buildPageIndicator(infoList.length, _currentPageIndex),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: MediaQuery.of(context).padding.top),
                     child: GeneralButton(
                       buttonText: _currentPageIndex == 0 ? 'Get Started' : 'Next',
                       onTap: () {
-                        if (_currentPageIndex == pages.length - 1) {
+                        if (_currentPageIndex == infoList.length - 1) {
                           Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                         } else {
                           _pageController.nextPage(

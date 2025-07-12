@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import '../../domain/models/onboarding_page.dart';
 
 abstract class RemoteConfigState extends Equatable {
   const RemoteConfigState();
@@ -13,12 +13,12 @@ class RemoteConfigInitial extends RemoteConfigState {}
 class RemoteConfigLoading extends RemoteConfigState {}
 
 class RemoteConfigSuccess extends RemoteConfigState {
-  final List<Widget> onboardPages;
+  final List<OnboardingPageInfo> infoList;
 
-  const RemoteConfigSuccess({required this.onboardPages});
+  const RemoteConfigSuccess({required this.infoList});
 
   @override
-  List<Object> get props => [onboardPages];
+  List<Object> get props => [infoList];
 }
 
 class RemoteConfigFailure extends RemoteConfigState {
