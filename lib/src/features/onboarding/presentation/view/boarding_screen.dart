@@ -20,27 +20,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
 
-  final Map<String, Widget> _pages = const {
-    'onboard1': BoardPage(
-      title: 'Life is short and the world is ',
-      lastWord: 'wide',
-      description: 'At Friends tours and travel, we customize reliable and trutworthy educational tours to destinations all over the world',
-      imageLocalPath: 'assets/images/board1.png',
-    ),
-    'onboard2': BoardPage(
-      title: 'It’s a big world out there go ',
-      lastWord: 'explore',
-      description: 'To get the best of your adventure you just need to leave and go where you like. we are waiting for you',
-      imageLocalPath: 'assets/images/board2.jpg',
-    ),
-    'onboard3': BoardPage(
-      title: 'People don’t take trips, trips take ',
-      lastWord: 'people',
-      description: 'To get the best of your adventure you just need to leave and go where you like. we are waiting for you',
-      imageLocalPath: 'assets/images/board3.jpg',
-    ),
-  };
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RemoteConfigBloc>(
@@ -58,9 +37,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
             }
 
             if (state is RemoteConfigSuccess) {
-              final List<Widget> pages = state.onboardOrder.map((screenKey) {
-                return _pages[screenKey]!;
-              }).toList();
+              final List<Widget> pages = state.onboardPages;
               return Column(
                 children: [
                   Expanded(
@@ -79,7 +56,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: MediaQuery.of(context).padding.top),
                     child: GeneralButton(
                       buttonText: _currentPageIndex == 0 ? 'Get Started' : 'Next',
-
                       onTap: () {
                         if (_currentPageIndex == pages.length - 1) {
                           Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);

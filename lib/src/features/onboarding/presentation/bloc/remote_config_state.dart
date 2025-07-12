@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class RemoteConfigState extends Equatable {
   const RemoteConfigState();
@@ -12,12 +13,12 @@ class RemoteConfigInitial extends RemoteConfigState {}
 class RemoteConfigLoading extends RemoteConfigState {}
 
 class RemoteConfigSuccess extends RemoteConfigState {
-  final List<String> onboardOrder;
+  final List<Widget> onboardPages;
 
-  const RemoteConfigSuccess({required this.onboardOrder});
+  const RemoteConfigSuccess({required this.onboardPages});
 
   @override
-  List<Object> get props => [onboardOrder];
+  List<Object> get props => [onboardPages];
 }
 
 class RemoteConfigFailure extends RemoteConfigState {

@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:travenor/src/features/onboarding/domain/models/onboarding_page.dart';
 
 import '../../../../constants/colors.dart';
 
 class BoardPage extends StatelessWidget {
-  final String title;
-  final String lastWord;
-  final String description;
-  final String imageLocalPath;
+  final OnboardingPageInfo info;
 
-  const BoardPage({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.imageLocalPath,
-    required this.lastWord,
-  });
+  const BoardPage({super.key, required this.info});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +16,7 @@ class BoardPage extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
-              image: DecorationImage(image: AssetImage(imageLocalPath), fit: BoxFit.cover),
+              image: DecorationImage(image: AssetImage(info.imageLocalPath), fit: BoxFit.cover),
             ),
           ),
         ),
@@ -38,7 +30,7 @@ class BoardPage extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: title,
+                      text: info.title,
                       style: TextStyle(
                         fontSize: 30,
                         color: blackText,
@@ -46,7 +38,7 @@ class BoardPage extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: lastWord,
+                      text: info.lastWord,
                       style: TextStyle(
                         fontSize: 30,
                         color: secondaryColor,
@@ -58,7 +50,7 @@ class BoardPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                description,
+                info.description,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16, color: grey, fontWeight: FontWeight.w400),
               ),

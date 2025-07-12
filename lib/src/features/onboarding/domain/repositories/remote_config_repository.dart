@@ -1,3 +1,5 @@
+import '../models/onboarding_page.dart';
+
 abstract class RemoteConfigRepository {
-  Future<List<String>> getOnBoardingPagesOrder();
+  Future<List<OnboardingPageInfo>> getOnboardingPages();
 }
