@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travenor/src/constants/colors.dart';
 import 'package:travenor/src/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:travenor/src/features/onboarding/data/repositories/remote_config_repository_impl.dart';
 import 'package:travenor/src/features/places/data/repositories/places_repository_impl.dart';
@@ -17,6 +16,7 @@ import 'src/routing/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'src/features/auth/domain/repositories/auth_repository.dart';
 import 'src/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'src/utils/theme/theme.dart';
 
 void main() async {
   Bloc.observer = AppBlocObserver();
@@ -47,13 +47,10 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'Travenor',
-          theme: ThemeData(
-            fontFamily: 'sf',
-            textTheme: TextTheme(
-              titleLarge: TextStyle(fontSize: 26, fontWeight: FontWeight.w600, color: blackText),
-              titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: grey),
-            ),
-          ),
+          themeMode: ThemeMode.system,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+
           onGenerateRoute: appRouter.onGenerateRoute,
         ),
       ),

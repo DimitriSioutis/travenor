@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:travenor/src/constants/colors.dart';
 
 class ImageGalleryDialog extends StatefulWidget {
   final List<String> images;
@@ -104,7 +103,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22.0),
                     border: Border.all(
-                      color: index == _currentIndex ? mainColor : Colors.transparent,
+                      color: _getBorderColor(index, context),
                       width: 2.0,
                     ),
                   ),
@@ -120,4 +119,6 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
       ),
     );
   }
+
+  Color _getBorderColor(int index, BuildContext context) => index == _currentIndex ? Theme.of(context).colorScheme.primary : Colors.transparent;
 }

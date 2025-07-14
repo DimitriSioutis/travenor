@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travenor/src/constants/colors.dart';
 import 'package:travenor/src/common_widgets/general_button.dart';
 import '../../../../common_widgets/travenor_back_button.dart';
 import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
@@ -24,13 +23,12 @@ class _PlaceScreenState extends State<PlaceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: BlocProvider<PlaceDetailsBloc>(
         create: (context) => PlaceDetailsBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPlaceDetails(widget.placeId)),
         child: BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
           builder: (context, PlaceDetailsState state) {
             if (state is PlaceDetailsLoading) {
-              return const Center(child: CircularProgressIndicator(color: mainColor));
+              return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
             }
             if (state is PlaceDetailsError) {
               return Text(state.error);
@@ -70,7 +68,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
             TravenorBackButton(iconColor: Colors.white),
             Text(
               'Details',
-              style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white),
             ),
             FavoriteIconButton(
               place: place,

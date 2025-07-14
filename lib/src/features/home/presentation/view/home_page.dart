@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travenor/src/constants/colors.dart';
 import 'package:travenor/src/features/places/domain/models/place.dart';
 import '../../../places/presentation/bloc/popular_places/popular_places_bloc.dart';
 import '../../../places/presentation/bloc/popular_places/popular_places_state.dart';
@@ -17,14 +16,14 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(),
+            _buildHeader(context),
             const SizedBox(height: 40),
             _buildListHeader(context),
             const SizedBox(height: 20),
             BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
               builder: (context, state) {
                 if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
-                  return const Center(child: CircularProgressIndicator(color: mainColor));
+                  return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
                 }
                 if (state is PopularPlacesLoaded) {
                   return _buildBestDestinationsList(state.places);
@@ -72,7 +71,7 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             'Best Destination',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
           InkWell(
             onTap: () {
@@ -80,7 +79,9 @@ class HomePage extends StatelessWidget {
             },
             child: Text(
               'View All',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: secondaryColor),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
         ],
@@ -88,7 +89,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: RichText(
@@ -98,24 +99,24 @@ class HomePage extends StatelessWidget {
               text: 'Explore the',
               style: TextStyle(
                 fontSize: 38,
-                color: blackText,
                 fontWeight: FontWeight.w300,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             TextSpan(
               text: '\nBeautiful',
               style: TextStyle(
                 fontSize: 38,
-                color: blackText,
                 fontWeight: FontWeight.w700,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             TextSpan(
               text: ' world!',
               style: TextStyle(
                 fontSize: 38,
-                color: secondaryColor,
                 fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],

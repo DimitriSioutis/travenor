@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/features/onboarding/domain/models/onboarding_page.dart';
 import 'package:travenor/src/features/onboarding/domain/repositories/remote_config_repository.dart';
-import '../../../../constants/colors.dart';
 import '../bloc/remote_config_bloc.dart';
 import '../../../../common_widgets/general_button.dart';
 import '../bloc/remote_config_event.dart';
@@ -26,7 +25,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
     return BlocProvider<RemoteConfigBloc>(
       create: (context) => RemoteConfigBloc(remoteConfigRepository: context.read<RemoteConfigRepository>())..add(InitializeAndFetchConfig()),
       child: Scaffold(
-        backgroundColor: bgColor,
         body: BlocConsumer<RemoteConfigBloc, RemoteConfigState>(
           listener: (context, state) {
             if (state is RemoteConfigSuccess) {
@@ -35,7 +33,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
           },
           builder: (context, state) {
             if (state is RemoteConfigLoading || state is RemoteConfigInitial) {
-              return const Center(child: CircularProgressIndicator(color: mainColor));
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (state is RemoteConfigFailure) {

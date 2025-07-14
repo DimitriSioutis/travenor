@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../constants/colors.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 
 class ForgotPasswordDialog extends StatelessWidget {
   const ForgotPasswordDialog({
@@ -13,7 +12,7 @@ class ForgotPasswordDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       alignment: Alignment.center,
-      backgroundColor: bgColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: InkWell(
         onTap: () => Navigator.pop(context),
         child: Container(
@@ -26,17 +25,18 @@ class ForgotPasswordDialog extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: secondaryColor,
                 child: SvgPicture.asset('assets/icons/email.svg'),
               ),
               Text(
                 'Check your email',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: blackText),
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
               Text(
                 'We have send password recovery instruction to your email',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleSmall,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+                ),
               ),
             ],
           ),

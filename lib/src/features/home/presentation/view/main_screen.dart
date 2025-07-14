@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/colors.dart';
 import '../../../bottom_bar_pages/calendar_page.dart';
 import '../../../bottom_bar_pages/messages_page.dart';
 import '../../../bottom_bar_pages/profile_page.dart';
@@ -38,20 +37,19 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: bgColor,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: ProfileNameBox(),
       ),
       body: Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         child: _pages[_selectedIndex],
       ),
       bottomNavigationBar: Container(
         height: 100 + MediaQuery.of(context).padding.bottom,
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(200, 30),
             topRight: Radius.elliptical(200, 30),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common_widgets/travenor_back_button.dart';
-import '../../../../constants/colors.dart';
 import '../bloc/popular_places/popular_places_bloc.dart';
 import '../bloc/popular_places/popular_places_state.dart';
 import '../widgets/place_grid_card_popular.dart';
@@ -12,7 +11,6 @@ class PopularPlaces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
         child: Column(
@@ -24,7 +22,7 @@ class PopularPlaces extends StatelessWidget {
                 TravenorBackButton(),
                 Text(
                   'Popular Places',
-                  style: TextStyle(color: blackText, fontSize: 18, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(),
               ],
@@ -32,14 +30,14 @@ class PopularPlaces extends StatelessWidget {
             const SizedBox(height: 40),
             Text(
               'All Popular Places',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             const SizedBox(height: 20),
             Expanded(
               child: BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
                 builder: (context, state) {
                   if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
-                    return const Center(child: CircularProgressIndicator(color: mainColor));
+                    return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
                   }
                   if (state is PopularPlacesLoaded) {
                     return GridView.builder(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import '../../../../common_widgets/travenor_back_button.dart';
 import '../../../../common_widgets/general_button.dart';
-import '../../../../constants/colors.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../bloc/forget_password/forget_password_bloc.dart';
 import '../bloc/forget_password/forget_password_event.dart';
@@ -30,7 +30,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: BlocProvider(
         create: (context) => ForgetPasswordBloc(authRepository: context.read<AuthRepository>()),
         child: BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
@@ -46,7 +45,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
           builder: (context, state) {
             if (state is ForgetPasswordLoading) {
-              return const Center(child: CircularProgressIndicator(color: mainColor));
+              return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
             }
             return Center(
               child: Form(
@@ -61,7 +60,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         alignment: Alignment.topLeft,
                         child: TravenorBackButton(),
                       ),
-
                       const SizedBox(height: 40),
                       _buildHeader(context),
                       const SizedBox(height: 24),
@@ -82,12 +80,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Forgot Password', style: Theme.of(context).textTheme.titleLarge),
-
+        Text('Forgot Password', style: Theme.of(context).textTheme.displayLarge),
         const SizedBox(height: 12),
         Text(
           'Enter your email account to reset  your password',
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+          ),
         ),
       ],
     );
@@ -106,7 +105,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           padding: const EdgeInsets.fromLTRB(0, 40, 0, 12),
           child: GeneralButton(
             onTap: () => _resetPassword(context),
-
             buttonText: 'Reset Password',
           ),
         ),

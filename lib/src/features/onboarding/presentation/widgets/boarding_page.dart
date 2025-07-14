@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import 'package:travenor/src/features/onboarding/domain/models/onboarding_page.dart';
-
-import '../../../../constants/colors.dart';
 
 class BoardPage extends StatelessWidget {
   final OnboardingPageInfo info;
@@ -33,16 +32,16 @@ class BoardPage extends StatelessWidget {
                       text: info.title,
                       style: TextStyle(
                         fontSize: 30,
-                        color: blackText,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     TextSpan(
                       text: info.lastWord,
                       style: TextStyle(
                         fontSize: 30,
-                        color: secondaryColor,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -52,7 +51,9 @@ class BoardPage extends StatelessWidget {
               Text(
                 info.description,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16, color: grey, fontWeight: FontWeight.w400),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+                ),
               ),
             ],
           ),

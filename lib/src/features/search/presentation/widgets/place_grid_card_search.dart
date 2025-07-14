@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../constants/colors.dart';
+import '../../../../extensions/color_scheme_extension.dart';
 import '../../../places/domain/models/place.dart';
 
 class PlaceGridCardSearch extends StatelessWidget {
@@ -17,7 +16,7 @@ class PlaceGridCardSearch extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -53,7 +52,8 @@ class PlaceGridCardSearch extends StatelessWidget {
                   children: [
                     Text(
                       place.name,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: blackText, overflow: TextOverflow.ellipsis),
+                      style: Theme.of(context).textTheme.titleLarge,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       children: [
@@ -62,27 +62,29 @@ class PlaceGridCardSearch extends StatelessWidget {
                         Expanded(
                           child: Text(
                             place.location,
-                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey, overflow: TextOverflow.ellipsis),
+                            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                              color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
                     ),
-
-                    Row(
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            text: '\$${place.price}',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: mainColor),
-                            children: [
-                              TextSpan(
-                                text: '/Person',
-                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: grey),
-                              ),
-                            ],
-                          ),
+                    RichText(
+                      text: TextSpan(
+                        text: '\$${place.price}',
+                        style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
                         ),
-                      ],
+                        children: [
+                          TextSpan(
+                            text: '/Person',
+                            style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

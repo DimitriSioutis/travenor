@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../constants/colors.dart';
+import '../../../../extensions/color_scheme_extension.dart';
 
 class EmailTextFormField extends StatelessWidget {
   const EmailTextFormField({
@@ -15,16 +14,20 @@ class EmailTextFormField extends StatelessWidget {
     return TextFormField(
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(14)),
           borderSide: BorderSide.none,
         ),
         hintText: 'email',
-        hintStyle: const TextStyle(color: grey),
-        fillColor: lightGrey,
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+        ),
+        fillColor: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,
         filled: true,
       ),
+
       validator: (value) {
         if (value == null || !value.contains('@')) {
           return 'Please enter a valid email';

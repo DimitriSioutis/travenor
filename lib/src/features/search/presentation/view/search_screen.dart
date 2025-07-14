@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import '../../../../common_widgets/travenor_back_button.dart';
-import '../../../../constants/colors.dart';
 import '../../../places/domain/repositories/places_repository.dart';
 import '../bloc/search_places/search_places_bloc.dart';
 import '../bloc/search_places/search_places_event.dart';
@@ -30,7 +30,6 @@ class _SearchScreenState extends State<SearchScreen> {
     return BlocProvider<SearchPlacesBloc>(
       create: (BuildContext context) => SearchPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(SearchPlacesRequested('')),
       child: Scaffold(
-        backgroundColor: bgColor,
         body: BlocBuilder<SearchPlacesBloc, SearchPlacesState>(
           builder: (context, state) {
             return Padding(
@@ -44,10 +43,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   SizedBox(height: 20),
                   Text(
                     'All Popular Places',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                   SizedBox(height: 20),
-                  _buildSearchPlacesList(state),
+                  _buildSearchPlacesList(state, context),
                 ],
               ),
             );
@@ -64,12 +63,13 @@ class _SearchScreenState extends State<SearchScreen> {
         context.read<SearchPlacesBloc>().add(SearchPlacesRequested(value));
       },
       keyboardType: TextInputType.text,
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: const EdgeInsets.all(12.0),
           child: SvgPicture.asset(
             'assets/icons/search.svg',
-            color: grey,
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
           ),
         ),
         border: OutlineInputBorder(
@@ -77,9 +77,11 @@ class _SearchScreenState extends State<SearchScreen> {
           borderSide: BorderSide.none,
         ),
         hintText: 'Search Places',
-        hintStyle: const TextStyle(color: grey),
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+        ),
 
-        fillColor: lightGrey,
+        fillColor: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,
         filled: true,
       ),
     );
@@ -92,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
         TravenorBackButton(),
         Text(
           'Search',
-          style: TextStyle(color: blackText, fontSize: 18, fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         InkWell(
           onTap: () {
@@ -101,14 +103,16 @@ class _SearchScreenState extends State<SearchScreen> {
           },
           child: Text(
             'Cancel',
-            style: TextStyle(color: secondaryColor, fontSize: 16, fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildSearchPlacesList(SearchPlacesState state) {
+  Widget _buildSearchPlacesList(SearchPlacesState state, BuildContext context) {
     if (state is SearchPlacesLoaded) {
       return Expanded(
         child: GridView.builder(
@@ -129,7 +133,7 @@ class _SearchScreenState extends State<SearchScreen> {
       );
     }
     if (state is SearchPlacesLoading) {
-      return Center(child: CircularProgressIndicator(color: mainColor));
+      return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
     }
     return SizedBox();
   }

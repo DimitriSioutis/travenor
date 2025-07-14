@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../constants/colors.dart';
+import '../../../../extensions/color_scheme_extension.dart';
 import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth/auth_event.dart';
 import '../../../auth/presentation/bloc/auth/auth_state.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
-import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
 
 class ProfileNameBox extends StatelessWidget {
   const ProfileNameBox({
@@ -28,20 +26,23 @@ class ProfileNameBox extends StatelessWidget {
               context.read<AuthBloc>().add(SignOutRequested());
             },
             child: Container(
-              decoration: BoxDecoration(color: lightGrey, borderRadius: BorderRadius.circular(22)),
+              decoration: BoxDecoration(
+                color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,
+                borderRadius: BorderRadius.circular(22),
+              ),
               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CircleAvatar(
-                    backgroundColor: grey,
+                    backgroundColor: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
                     radius: 18.5,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6.0),
                     child: Text(
                       authState.user.username,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: blackText),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                 ],

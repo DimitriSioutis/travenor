@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../constants/colors.dart';
 
 class CenterButton extends StatelessWidget {
   const CenterButton({
@@ -15,7 +14,7 @@ class CenterButton extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: mainColor,
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(

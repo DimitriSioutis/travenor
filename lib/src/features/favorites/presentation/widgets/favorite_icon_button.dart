@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../constants/colors.dart';
+import '../../../../extensions/color_scheme_extension.dart';
 import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth/auth_state.dart';
 import '../../../places/domain/models/place.dart';
@@ -58,7 +58,7 @@ class FavoriteIconButton extends StatelessWidget {
             height: size,
             width: size,
             decoration: BoxDecoration(
-              color: grey.withValues(alpha: 0.15),
+              color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary!.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(size / 2),
             ),
             child: Center(

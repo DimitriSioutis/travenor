@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import '../../../../common_widgets/general_button.dart';
-import '../../../../constants/colors.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
 import '../bloc/auth/auth_bloc.dart';
@@ -32,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
@@ -54,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   _buildHeader(context),
                   const SizedBox(height: 24),
                   state is AuthLoading
-                      ? const Center(child: CircularProgressIndicator(color: mainColor))
+                      ? Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary))
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,11 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Sign in now', style: Theme.of(context).textTheme.titleLarge),
+        Text('Sign in now', style: Theme.of(context).textTheme.displayLarge),
         const SizedBox(height: 12),
         Text(
           'Please sign in to continue our app',
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+          ),
         ),
       ],
     );
@@ -111,7 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () => Navigator.pushNamed(context, '/forget_password'),
               child: Text(
                 'Forget Password?',
-                style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ),
           ),
@@ -133,16 +136,17 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         Text(
           'Don\'t have an account?',
-          style: TextStyle(color: grey, fontWeight: FontWeight.w400),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+          ),
         ),
-        SizedBox(width: 10),
         TextButton(
-          // splashColor: Colors.transparent,
-          // highlightColor: Colors.transparent,
           onPressed: () => Navigator.of(context).pushReplacementNamed('/signup'),
           child: Text(
             'Sign up',
-            style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
         ),
       ],

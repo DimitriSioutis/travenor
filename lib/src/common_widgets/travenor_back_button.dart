@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../constants/colors.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 
 class TravenorBackButton extends StatelessWidget {
-  const TravenorBackButton({super.key, this.iconColor = blackText});
-  final Color iconColor;
+  const TravenorBackButton({super.key, this.iconColor});
+  final Color? iconColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -14,7 +13,7 @@ class TravenorBackButton extends StatelessWidget {
         height: 44,
         width: 44,
         decoration: BoxDecoration(
-          color: grey.withValues(alpha: 0.15),
+          color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary!.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(22),
         ),
         child: Center(
@@ -22,7 +21,7 @@ class TravenorBackButton extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: SvgPicture.asset(
               'assets/icons/back.svg',
-              color: iconColor,
+              color: iconColor ?? Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),

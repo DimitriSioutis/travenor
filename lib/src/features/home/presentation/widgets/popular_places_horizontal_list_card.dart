@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import 'package:travenor/src/features/places/domain/models/place.dart';
-import '../../../../constants/colors.dart';
 import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
 
 class PopularPlacesHorizontalListCard extends StatelessWidget {
@@ -18,7 +18,7 @@ class PopularPlacesHorizontalListCard extends StatelessWidget {
         height: 384,
         width: 268,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
@@ -75,7 +75,8 @@ class PopularPlacesHorizontalListCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             place.name,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: blackText, overflow: TextOverflow.ellipsis),
+                            style: Theme.of(context).textTheme.headlineMedium,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         const SizedBox(width: 4),
@@ -84,7 +85,7 @@ class PopularPlacesHorizontalListCard extends StatelessWidget {
                             Icon(Icons.star, color: Color(0xffFFD336), size: 15),
                             Text(
                               '${place.rating}',
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: blackText),
+                              style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ],
                         ),
@@ -96,7 +97,9 @@ class PopularPlacesHorizontalListCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Text(
                           place.location,
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
+                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+                          ),
                         ),
                       ],
                     ),

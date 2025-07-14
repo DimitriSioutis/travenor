@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants/colors.dart';
-
 class GeneralButton extends StatelessWidget {
   const GeneralButton({
     super.key,
@@ -22,13 +20,15 @@ class GeneralButton extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
-          color: mainColor,
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(14),
         ),
         alignment: Alignment.center,
         child: Text(
           buttonText,
-          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
         ),
       ),
     );

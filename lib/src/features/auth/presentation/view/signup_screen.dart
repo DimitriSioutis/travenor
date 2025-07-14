@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/common_widgets/general_button.dart';
-import '../../../../constants/colors.dart';
+import '../../../../extensions/color_scheme_extension.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
 import '../bloc/auth/auth_bloc.dart';
@@ -35,7 +35,6 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
@@ -48,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
         },
         builder: (context, state) {
           if (state is AuthLoading) {
-            return const Center(child: CircularProgressIndicator(color: mainColor));
+            return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
           }
           return Center(
             child: Form(
@@ -60,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   _buildHeader(context),
                   const SizedBox(height: 24),
                   state is AuthLoading
-                      ? const Center(child: CircularProgressIndicator(color: mainColor))
+                      ? Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary))
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,11 +84,13 @@ class _SignupScreenState extends State<SignupScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Sign up now', style: Theme.of(context).textTheme.titleLarge),
+        Text('Sign up now', style: Theme.of(context).textTheme.displayLarge),
         const SizedBox(height: 12),
         Text(
           'Please fill the details and create account',
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+          ),
         ),
       ],
     );
@@ -116,10 +117,8 @@ class _SignupScreenState extends State<SignupScreen> {
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 'Password must be 8 characters',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: grey,
-                  fontWeight: FontWeight.w400,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
                 ),
               ),
             ),
@@ -139,16 +138,17 @@ class _SignupScreenState extends State<SignupScreen> {
       children: [
         Text(
           'Already have an account',
-          style: TextStyle(color: grey, fontWeight: FontWeight.w400),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+          ),
         ),
-        SizedBox(width: 10),
-        InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onTap: () => Navigator.of(context).pushReplacementNamed('/login'),
+        TextButton(
+          onPressed: () => Navigator.of(context).pushReplacementNamed('/login'),
           child: Text(
             'Sign in',
-            style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w500),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
         ),
       ],

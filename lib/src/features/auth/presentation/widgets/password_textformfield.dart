@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../constants/colors.dart';
+import '../../../../extensions/color_scheme_extension.dart';
 
 class PasswordTextFormField extends StatefulWidget {
   const PasswordTextFormField({
@@ -23,6 +22,9 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.passwordController,
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(14)),
@@ -30,13 +32,15 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         ),
         hintText: 'password',
         helper: widget.helper,
-        hintStyle: const TextStyle(color: grey),
-        fillColor: lightGrey,
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+        ),
+        fillColor: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,
         filled: true,
         suffixIcon: IconButton(
           icon: Icon(
             _isPasswordVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-            color: grey,
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
           ),
           onPressed: () {
             setState(() {
@@ -45,7 +49,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           },
         ),
       ),
-      style: const TextStyle(color: grey),
+
       obscureText: _isPasswordVisible,
       obscuringCharacter: '∗',
       validator: (value) {

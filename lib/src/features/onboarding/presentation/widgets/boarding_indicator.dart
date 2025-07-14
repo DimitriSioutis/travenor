@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/colors.dart';
-
 class BoardingIndicator extends StatelessWidget {
   const BoardingIndicator({
     super.key,
@@ -18,9 +16,11 @@ class BoardingIndicator extends StatelessWidget {
       height: 7.0,
       width: isActive ? 35.0 : 6.0,
       decoration: BoxDecoration(
-        color: isActive ? mainColor : mainColor.withValues(alpha: 0.4),
+        color: _getColor(context),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
+
+  Color _getColor(BuildContext context) => isActive ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.primary.withValues(alpha: 0.4);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:readmore/readmore.dart';
-import '../../../../constants/colors.dart';
+import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import '../../domain/models/place.dart';
 import 'images_gallery_dialog.dart';
 
@@ -20,7 +20,7 @@ class PlaceDetailsPanel extends StatelessWidget {
       child: Container(
         height: (MediaQuery.of(context).size.height / 2) + 70,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(200, 30),
             topRight: Radius.elliptical(200, 30),
@@ -40,12 +40,12 @@ class PlaceDetailsPanel extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildHeader(),
+              _buildHeader(context),
               const SizedBox(height: 24),
-              _buildStatsRow(),
+              _buildStatsRow(context),
               if (place.images.isNotEmpty) _buildImagesRow(context),
               const SizedBox(height: 24),
-              _buildDescription(),
+              _buildDescription(context),
             ],
           ),
         ),
@@ -53,24 +53,26 @@ class PlaceDetailsPanel extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           place.name,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: blackText),
+          style: Theme.of(context).textTheme.displayMedium,
         ),
         const SizedBox(height: 4),
         Text(
           place.location,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: grey),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildStatsRow() {
+  Widget _buildStatsRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -80,7 +82,9 @@ class PlaceDetailsPanel extends StatelessWidget {
             const SizedBox(width: 4),
             Text(
               place.location,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+              ),
             ),
           ],
         ),
@@ -89,18 +93,22 @@ class PlaceDetailsPanel extends StatelessWidget {
             Icon(Icons.star, color: Color(0xffFFD336), size: 15),
             Text(
               '${place.rating}',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: blackText),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),
         RichText(
           text: TextSpan(
             text: '\$${place.price}',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: mainColor),
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              color: Theme.of(context).colorScheme.primary,
+            ),
             children: [
               TextSpan(
                 text: '/Person',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: grey),
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+                ),
               ),
             ],
           ),
@@ -127,7 +135,7 @@ class PlaceDetailsPanel extends StatelessWidget {
           padding: const EdgeInsets.only(right: 26.0),
           child: GestureDetector(
             onTap: () => _showImageGalleryDialog(context, place.images, index),
-            child: (index == 4 && place.images.length > 5) ? _buildImagePreviewWithCount() : _buildImagePreview(index),
+            child: (index == 4 && place.images.length > 5) ? _buildImagePreviewWithCount(context) : _buildImagePreview(index),
           ),
         );
       }),
@@ -148,7 +156,7 @@ class PlaceDetailsPanel extends StatelessWidget {
     );
   }
 
-  Widget _buildImagePreviewWithCount() {
+  Widget _buildImagePreviewWithCount(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -163,7 +171,7 @@ class PlaceDetailsPanel extends StatelessWidget {
           child: Center(
             child: Text(
               '+${place.images.length - 5}',
-              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
             ),
           ),
         ),
@@ -171,14 +179,11 @@ class PlaceDetailsPanel extends StatelessWidget {
     );
   }
 
-  Widget _buildDescription() {
+  Widget _buildDescription(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'About Destination',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: blackText),
-        ),
+        Text('About Destination', style: Theme.of(context).textTheme.displaySmall),
         const SizedBox(height: 12),
         SizedBox(
           height: 150,
@@ -187,12 +192,19 @@ class PlaceDetailsPanel extends StatelessWidget {
               place.description,
               trimMode: TrimMode.Line,
               trimLines: 1,
-              trimCollapsedText: 'Show more',
-              trimExpandedText: 'Show less',
-              colorClickableText: secondaryColor,
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: grey, height: 2),
-              moreStyle: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: secondaryColor),
-              // colorClickableText: secondaryColor,
+              trimCollapsedText: 'Read more',
+              trimExpandedText: 'Read less',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+                color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
+              ),
+              moreStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              lessStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
         ),
