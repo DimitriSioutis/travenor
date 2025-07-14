@@ -10,17 +10,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cfb3969-393e-44ee-bf47-4aac865cddf2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/logic/blocs/forget_password/forget_password_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/blocs/forget_password/forget_password_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logic/blocs/forget_password/forget_password_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication/forget_password_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/extensions/color_scheme_extension.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/utils/theme/custom_themes/color_scheme.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/utils/theme/custom_themes/text_theme.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/src/utils/theme/theme.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/repositories/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repositories/auth_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/router/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/router/app_router.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication/signup_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/authentication/widgets/password_textformfield.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/authentication/widgets/password_textformfield.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/common_widgets/general_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/common_widgets/general_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/common_widgets/travenor_back_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/common_widgets/travenor_back_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/constants/colors.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/forget_password_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/forget_password_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/view/signup_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/email_textformfield.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/email_textformfield.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/forgot_password_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/forgot_password_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/password_textformfield.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/password_textformfield.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/username_textformfield.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/widgets/username_textformfield.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/favorites/presentation/widgets/favorite_icon_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/favorites/presentation/widgets/favorite_icon_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/view/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/view/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/view/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/view/main_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/center_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/center_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/menu_icon_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/menu_icon_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/popular_places_horizontal_list_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/popular_places_horizontal_list_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/profile_name_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/home/presentation/widgets/profile_name_box.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/view/boarding_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/boarding_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/boarding_indicator.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/boarding_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/onboarding/presentation/widgets/boarding_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/view/place_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/view/place_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/view/popular_places.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/view/popular_places.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/widgets/images_gallery_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/widgets/images_gallery_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/widgets/place_details_panel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/widgets/place_details_panel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/places/presentation/widgets/place_grid_card_popular.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/places/presentation/widgets/place_grid_card_popular.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/search/presentation/view/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/search/presentation/view/search_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/search/presentation/widgets/place_grid_card_search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/search/presentation/widgets/place_grid_card_search.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/utils/error_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/utils/error_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,35 +71,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Flutter.main.dart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "dev",
-    "io.flutter.reload.alreadyRun": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/FlutterProjects/travenor/assets/icons",
-    "settings.editor.selected.configurable": "preferences.sourceCode",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/FlutterProjects/travenor/lib/src/features/onboarding/domain&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\onboarding\domain" />
       <recent name="D:\FlutterProjects\travenor\assets\icons" />
       <recent name="D:\FlutterProjects\travenor\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\FlutterProjects\travenor\assets" />
-      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\bottom_bar_pages\home_page" />
-      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\main_screen" />
-      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\boarding_screen" />
-      <recent name="D:\FlutterProjects\travenor\lib\presentation\screens\search_screen" />
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\search\presentation\widgets" />
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\home\presentation\view" />
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\onboarding\presentation\widgets" />
+      <recent name="D:\FlutterProjects\travenor\lib\src\features\favorites\presentation" />
+      <recent name="D:\FlutterProjects\travenor\lib\src\features" />
     </key>
   </component>
   <component name="RunManager">
