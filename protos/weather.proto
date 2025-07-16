@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package weather;
+
+option go_package = "codeberg.org/andyscott/OpenWeather-gRPC-API/proto";
+
+import "location.proto";
+
+/* Get the current forecast for a given location
+ * location_type {LocationType} - name or value of the desired LocationType enum
+ * units {Units} - name or value of the desired Units enum
+ * location {OneOfLocation} - city name, zip code, or coordinates
+ */
+message RequestCurrent {
+  LocationType location_type = 1;
+  Units units = 2;
+  OneOfLocation location = 3;
+}
+
+// Response to RequestCurrent
+message SendCurrent {
+  string payload = 1;
+}
+
+/* Get the extended forecast for a given location up to 16 days in the future
+ * location_type {LocationType} - name or value of the desired LocationType enum
+ * units {Units} - name or value of the desired Units enum
+ * location {OneOfLocation} - city name, zip code, or coordinates
+ */
+message RequestFiveDay {
+  LocationType location_type = 1;
+  Units units = 2;
+  OneOfLocation location = 3;
+}
+
+// Response to RequestExtended
+message SendFiveDay {
+  string payload = 1;
+}
+
+// Sub-message used by Current & Extended to specify preferred units
+// If unspecified, results will default to standard (temperature in Kelvin)
+enum Units {
+  UNITS_UNSPECIFIED = 0;
+  UNITS_STANDARD = 1;
+  UNITS_METRIC = 2;
+  UNITS_IMPERIAL = 3;
+}

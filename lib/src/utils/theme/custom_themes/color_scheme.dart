@@ -13,6 +13,8 @@ class AppColorScheme {
   static const Color _blackText = Color(0xFF1B1E28);
   static const Color _darkBgColor = Color(0xFF1C1C23);
 
+  static const Color _shadowColor = Color(0x1FB4BCC9);
+
   static const ColorScheme lightColorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: _mainColor,
@@ -23,6 +25,7 @@ class AppColorScheme {
     onError: Colors.white,
     surface: _lightBgColor,
     onSurface: _blackText,
+    shadow: _shadowColor,
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
@@ -35,5 +38,6 @@ class AppColorScheme {
     onError: Colors.white,
     surface: _darkBgColor,
     onSurface: _whiteText,
+    shadow: _shadowColor,
   );
 }

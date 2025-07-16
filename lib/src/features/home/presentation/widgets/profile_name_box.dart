@@ -30,7 +30,7 @@ class ProfileNameBox extends StatelessWidget {
                 color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,
                 borderRadius: BorderRadius.circular(22),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+              padding: EdgeInsets.all(4.0),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

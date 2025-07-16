@@ -25,7 +25,7 @@ class PopularPlacesHorizontalListCard extends StatelessWidget {
               offset: Offset(0, 6),
               blurRadius: 16,
               spreadRadius: 0,
-              color: Color(0xFFB4BCC9).withValues(alpha: 0.12),
+              color: Theme.of(context).colorScheme.shadow,
             ),
           ],
         ),

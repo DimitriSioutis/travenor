@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
-    // print(bloc.state);
+    print(bloc.state);
     super.onChange(bloc, change);
   }
 

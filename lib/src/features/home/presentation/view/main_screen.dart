@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bottom_bar_pages/calendar_page.dart';
 import '../../../bottom_bar_pages/messages_page.dart';
 import '../../../bottom_bar_pages/profile_page.dart';
+import '../../../weather/presentation/bloc/weather_bloc.dart';
+import '../../../weather/presentation/bloc/weather_event.dart';
+import '../../../weather/presentation/widgets/weather_widget.dart';
 import '../widgets/center_button.dart';
 import 'home_page.dart';
 import '../widgets/menu_icon_button.dart';
@@ -26,6 +30,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
+      context.read<WeatherBloc>().add(WeatherRequested());
       _selectedIndex = index;
     });
   }
@@ -39,7 +44,13 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        title: ProfileNameBox(),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ProfileNameBox(),
+            WeatherWidget(),
+          ],
+        ),
       ),
       body: Container(
         color: Theme.of(context).colorScheme.surface,

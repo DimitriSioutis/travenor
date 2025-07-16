@@ -11,6 +11,10 @@ import 'src/features/favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import 'src/features/onboarding/domain/repositories/remote_config_repository.dart';
 import 'src/features/places/presentation/bloc/popular_places/popular_places_bloc.dart';
 import 'src/features/places/presentation/bloc/popular_places/popular_places_event.dart';
+import 'src/features/weather/data/repositories/weather_repository_impl.dart';
+import 'src/features/weather/domain/repositories/weather_repository.dart';
+import 'src/features/weather/presentation/bloc/weather_bloc.dart';
+import 'src/features/weather/presentation/bloc/weather_event.dart';
 import 'src/utils/app_bloc_observer.dart';
 import 'src/routing/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,10 +30,15 @@ void main() async {
   runApp(MyApp(appRouter: AppRouter()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key, required this.appRouter});
   final AppRouter appRouter;
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -38,20 +47,24 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<PlacesRepository>(create: (context) => PlacesRepositoryImpl()),
         RepositoryProvider<FavoritesRepository>(create: (context) => FavoritesRepositoryImpl()),
         RepositoryProvider<RemoteConfigRepository>(create: (context) => RemoteConfigRepositoryImpl()),
+        RepositoryProvider<WeatherRepository>(create: (context) => WeatherRepositoryImpl()),
       ],
+
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())),
           BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepository>())),
           BlocProvider<PopularPlacesBloc>(create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPopularPlaces())),
+          BlocProvider<WeatherBloc>(create: (context) => WeatherBloc(weatherRepository: context.read<WeatherRepository>())..add(WeatherRequested())),
         ],
+
         child: MaterialApp(
           title: 'Travenor',
           themeMode: ThemeMode.system,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
 
-          onGenerateRoute: appRouter.onGenerateRoute,
+          onGenerateRoute: widget.appRouter.onGenerateRoute,
         ),
       ),
     );

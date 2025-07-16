@@ -4,6 +4,7 @@ import 'package:travenor/src/extensions/color_scheme_extension.dart';
 import '../../../../common_widgets/general_button.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
+import '../../../weather/presentation/widgets/weather_widget.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/auth/auth_event.dart';
 import '../bloc/auth/auth_state.dart';
