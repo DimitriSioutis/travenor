@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/features/favorites/domain/repositories/favorites_repository.dart';
@@ -5,6 +6,7 @@ import 'package:travenor/src/features/onboarding/data/repositories/remote_config
 import 'package:travenor/src/features/places/data/repositories/places_repository_impl.dart';
 import 'package:travenor/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:travenor/src/features/places/domain/repositories/places_repository.dart';
+import 'package:travenor/src/services/notification_service.dart';
 import 'src/features/favorites/data/repositories/favorites_repository_impl.dart';
 import 'firebase_options.dart';
 import 'src/features/favorites/presentation/bloc/favorites/favorites_bloc.dart';
@@ -23,22 +25,28 @@ import 'src/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'src/utils/theme/theme.dart';
 
 void main() async {
-  Bloc.observer = AppBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = AppBlocObserver();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  runApp(MyApp(appRouter: AppRouter()));
+  final notificationService = NotificationService();
+  await notificationService.init();
+  runApp(
+    MyApp(
+      appRouter: AppRouter(),
+      notificationService: notificationService,
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key, required this.appRouter});
+class MyApp extends StatelessWidget {
+  const MyApp({
+    super.key,
+    required this.appRouter,
+    required this.notificationService,
+  });
   final AppRouter appRouter;
+  final NotificationService notificationService;
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -48,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         RepositoryProvider<FavoritesRepository>(create: (context) => FavoritesRepositoryImpl()),
         RepositoryProvider<RemoteConfigRepository>(create: (context) => RemoteConfigRepositoryImpl()),
         RepositoryProvider<WeatherRepository>(create: (context) => WeatherRepositoryImpl()),
+        RepositoryProvider<NotificationService>.value(value: notificationService),
       ],
 
       child: MultiBlocProvider(
@@ -64,9 +73,13 @@ class _MyAppState extends State<MyApp> {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
 
-          onGenerateRoute: widget.appRouter.onGenerateRoute,
+          onGenerateRoute: appRouter.onGenerateRoute,
         ),
       ),
     );
   }
+}
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }
