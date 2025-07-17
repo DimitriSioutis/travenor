@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travenor/src/features/auth/presentation/bloc/auth/auth_event.dart';
 import 'package:travenor/src/features/booking/domain/repositories/booking_repository.dart';
 import 'package:travenor/src/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:travenor/src/features/onboarding/data/repositories/remote_config_repository_impl.dart';
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
 
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())),
+          BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())..add(CheckAuthStatus())),
           BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepository>())),
           BlocProvider<PopularPlacesBloc>(create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPopularPlaces())),
           BlocProvider<WeatherBloc>(create: (context) => WeatherBloc(weatherRepository: context.read<WeatherRepository>())..add(WeatherRequested())),

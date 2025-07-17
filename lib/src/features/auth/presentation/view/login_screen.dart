@@ -57,6 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 24),
                   state is AuthLoading
                       ? Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary))
+                      : state is AuthLoading
+                      ? Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary))
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
