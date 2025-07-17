@@ -10,43 +10,40 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(context),
-            const SizedBox(height: 40),
-            _buildListHeader(context),
-            const SizedBox(height: 20),
-            BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
-              builder: (context, state) {
-                if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
-                  return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
-                }
-                if (state is PopularPlacesLoaded) {
-                  return _buildBestDestinationsList(state.places);
-                }
-                if (state is PopularPlacesError) {
-                  return Center(child: Text(state.error));
-                }
-                return SizedBox();
-              },
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(context),
+          const SizedBox(height: 40),
+          _buildListHeader(context),
+          BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
+            builder: (context, state) {
+              if (state is PopularPlacesLoading || state is PopularPlacesInitial) {
+                return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
+              }
+              if (state is PopularPlacesLoaded) {
+                return _buildBestDestinationsList(context, state.places);
+              }
+              if (state is PopularPlacesError) {
+                return Center(child: Text(state.error));
+              }
+              return SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildBestDestinationsList(List<Place> places) {
+  Widget _buildBestDestinationsList(BuildContext context, List<Place> places) {
     return SizedBox(
-      height: 384,
+      height: 384 + 50,
+      width: MediaQuery.of(context).size.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
         itemCount: 2,
+        padding: EdgeInsets.symmetric(vertical: 25),
         itemBuilder: (context, index) {
           final place = places[index];
           return Padding(
@@ -73,10 +70,8 @@ class HomePage extends StatelessWidget {
             'Best Destination',
             style: Theme.of(context).textTheme.displaySmall,
           ),
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/popular_places');
-            },
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, '/popular_places'),
             child: Text(
               'View All',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(

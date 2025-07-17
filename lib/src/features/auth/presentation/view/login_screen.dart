@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/extensions/color_scheme_extension.dart';
+import 'package:travenor/src/features/booking/presentation/bloc/booking_event.dart';
 import '../../../../common_widgets/general_button.dart';
+import '../../../booking/presentation/bloc/booking_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_bloc.dart';
 import '../../../favorites/presentation/bloc/favorites/favorites_event.dart';
-import '../../../weather/presentation/widgets/weather_widget.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/auth/auth_event.dart';
 import '../bloc/auth/auth_state.dart';
@@ -37,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is Authenticated) {
             context.read<FavoritesBloc>().add(LoadFavorites(state.user.uid));
+            context.read<BookingBloc>().add(LoadBookedPlaces(state.user.uid));
             Navigator.of(context).pushReplacementNamed('/main');
           }
           if (state is AuthFailure) {

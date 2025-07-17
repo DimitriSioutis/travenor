@@ -21,6 +21,19 @@ class Place extends Equatable {
     required this.images,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'location': location,
+      'rating': rating,
+      'imageUrl': imageUrl,
+      'description': description,
+      'price': price,
+      'images': images,
+    };
+  }
+
   @override
   List<Object> get props => [id, name, location, rating, imageUrl, description, price, images];
 }

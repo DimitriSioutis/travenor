@@ -1,6 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:travenor/src/features/places/data/repositories/places_repository_impl.dart';
-
 import '../../../domain/models/place.dart';
 import '../../../domain/repositories/places_repository.dart';
 import 'place_details_event.dart';

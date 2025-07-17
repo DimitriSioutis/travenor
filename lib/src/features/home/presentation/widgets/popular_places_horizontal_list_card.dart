@@ -13,10 +13,12 @@ class PopularPlacesHorizontalListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(24),
       onTap: () => onTap(),
       child: Container(
         height: 384,
         width: 268,
+        clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(24),

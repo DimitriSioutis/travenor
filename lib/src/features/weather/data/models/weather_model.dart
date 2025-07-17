@@ -16,12 +16,12 @@ class WeatherModel extends Equatable {
 
   @override
   List<Object?> get props => [locationName, description, iconCode, temperature];
-  factory WeatherModel.fromGRPCAPI(Map<String, dynamic> rowWeather) {
+  factory WeatherModel.fromGRPCAPI(Map<String, dynamic> data) {
     return WeatherModel(
-      locationName: rowWeather['name'] ?? 'Unknown',
-      description: rowWeather['weather'][0]['description'] ?? '',
-      iconCode: rowWeather['weather'][0]['icon'] ?? '',
-      temperature: (rowWeather['main']['temp'] ?? 0.0).toDouble(),
+      locationName: data['name'] ?? 'Unknown',
+      description: data['weather'][0]['description'] ?? '',
+      iconCode: data['weather'][0]['icon'] ?? '',
+      temperature: (data['main']['temp'] ?? 0.0).toDouble(),
     );
   }
   Weather toDomain() {

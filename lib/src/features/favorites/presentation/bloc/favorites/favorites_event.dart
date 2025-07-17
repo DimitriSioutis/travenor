@@ -7,11 +7,6 @@ abstract class FavoritesEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class FavoritesUpdated extends FavoritesEvent {
-  final Set<String> favoritePlaces;
-  const FavoritesUpdated(this.favoritePlaces);
-}
-
 class LoadFavorites extends FavoritesEvent {
   final String userId;
   const LoadFavorites(this.userId);

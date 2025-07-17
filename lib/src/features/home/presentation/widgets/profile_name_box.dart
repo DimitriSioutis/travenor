@@ -22,9 +22,6 @@ class ProfileNameBox extends StatelessWidget {
         if (authState is Authenticated) {
           return InkWell(
             borderRadius: BorderRadius.circular(22),
-            onTap: () {
-              context.read<AuthBloc>().add(SignOutRequested());
-            },
             child: Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,

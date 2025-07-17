@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bottom_bar_pages/calendar_page.dart';
-import '../../../bottom_bar_pages/messages_page.dart';
-import '../../../bottom_bar_pages/profile_page.dart';
+import '../../../calendar/presentation/view/calendar_page.dart';
+import '../../../messages/presentation/view/messages_page.dart';
+import '../../../profile/presentation/view/profile_page.dart';
 import '../../../weather/presentation/bloc/weather_bloc.dart';
 import '../../../weather/presentation/bloc/weather_event.dart';
 import '../../../weather/presentation/widgets/weather_widget.dart';
 import '../widgets/center_button.dart';
+import '../widgets/profile_name_box.dart';
 import 'home_page.dart';
 import '../widgets/menu_icon_button.dart';
-import '../widgets/profile_name_box.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,8 +20,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  final PageController _pageController = PageController();
 
-  static final List _pages = [
+  static final List<Widget> _pages = [
     HomePage(),
     CalendarPage(),
     MessagesPage(),
@@ -29,10 +30,12 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      context.read<WeatherBloc>().add(WeatherRequested());
-      _selectedIndex = index;
-    });
+    context.read<WeatherBloc>().add(WeatherRequested());
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.linear,
+    );
   }
 
   bool _isSelected(int index) {
@@ -52,10 +55,25 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      body: Container(
-        color: Theme.of(context).colorScheme.surface,
-        child: _pages[_selectedIndex],
+      body: Padding(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (value) {
+            setState(() {
+              _selectedIndex = value;
+            });
+          },
+          children: _pages,
+        ),
       ),
+      //
+      // Container(
+      //   padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      //   color: Theme.of(context).colorScheme.surface,
+      //   child: _pages[_selectedIndex],
+      // ),
       bottomNavigationBar: Container(
         height: 100 + MediaQuery.of(context).padding.bottom,
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
@@ -68,9 +86,9 @@ class _MainScreenState extends State<MainScreen> {
           boxShadow: [
             BoxShadow(
               offset: Offset(-6, 0),
-              color: Color(0xffAFB8C6).withValues(alpha: 0.12),
-              spreadRadius: 0,
               blurRadius: 12,
+              spreadRadius: 0,
+              color: Theme.of(context).colorScheme.shadow,
             ),
           ],
         ),

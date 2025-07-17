@@ -22,6 +22,12 @@ class AppTheme {
     extensions: <ThemeExtension<dynamic>>[
       const CustomColorsExtension(onSurfaceSecondary: _grey, onSurfaceBlock: _fadeLightGreyColor),
     ],
+    pageTransitionsTheme: PageTransitionsTheme(
+      builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
+        TargetPlatform.values,
+        value: (dynamic _) => const CustomTransitionBuilder(),
+      ),
+    ),
   );
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
@@ -34,5 +40,26 @@ class AppTheme {
     extensions: <ThemeExtension<dynamic>>[
       const CustomColorsExtension(onSurfaceSecondary: _darkGrey, onSurfaceBlock: _fadeDarkGreyColor),
     ],
+    pageTransitionsTheme: PageTransitionsTheme(
+      builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
+        TargetPlatform.values,
+        value: (dynamic _) => const CustomTransitionBuilder(),
+      ),
+    ),
   );
+}
+
+class CustomTransitionBuilder extends PageTransitionsBuilder {
+  const CustomTransitionBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return FadeTransition(opacity: animation, child: child);
+  }
 }

@@ -18,7 +18,7 @@ class WeatherWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
           onTap: () => context.read<WeatherBloc>().add(WeatherRequested()),
           child: Container(
-            width: 150,
+            width: 180,
             padding: EdgeInsets.all(4.0),
             decoration: BoxDecoration(
               color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceBlock,
@@ -67,6 +67,7 @@ class WeatherWidget extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: Text(
             '${weather?.getCelsiusTemperature().toStringAsFixed(0)}°',
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Theme.of(context).colorScheme.primary,
             ),
