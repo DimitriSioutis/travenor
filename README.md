@@ -2,23 +2,23 @@
 
 Travenor is a modern, feature-rich travel application built with Flutter, designed to provide a seamless booking and travel exploration experience. The app leverages the full power of the Firebase ecosystem for its backend and implements a clean, scalable architecture using `flutter_bloc` for state management.
 
-![[Add a screenshot or a GIF of the app here]](https://via.placeholder.com/800x400.png?text=Add+App+Screenshot+Here)
-
 ## Features
-
 -   **Firebase Authentication**: Full user authentication suite including Sign Up, Sign In (Email & Google), and Forgot Password functionality.
 -   **Persistent Login**: Users remain logged in across app restarts for a smooth user experience.
 -   **Feature-Based Architecture**: Codebase is cleanly organized into features (Auth, Home, Calendar, etc.), each following a strict Data, Domain, and Presentation layer separation.
--   **BLoC State Management**: Predictable and scalable state management using `flutter_bloc`, ensuring a clear separation between business logic and UI.
--   **Real-time Weather Widget**: Displays the current weather by consuming a custom gRPC API.
--   **Push Notifications**: Integrated with Firebase Cloud Messaging (FCM) to handle notifications effectively:
-    -   **Foreground:** Custom local notifications are displayed using `flutter_local_notifications`.
-    -   **Background/Terminated:** Natively handled by the FCM SDK for reliability.
--   **Dynamic Onboarding**: The onboarding flow shown to new users can be dynamically controlled via Firebase Remote Config.
--   **Theming**: Users can switch between Light and Dark mode, with their preference saved locally across app sessions.
--   **Location Services**: Utilizes the device's GPS to fetch the user's current location for location-aware features like the weather forecast.
--   **Custom Animated Navigation**: Smooth, custom page transitions for a polished and unique user interface.
--   **Data Persistence**: User preferences like theme settings and onboarding completion are persisted locally using `shared_preferences`.
+-   **BLoC State Management**: Predictable and scalable state management using `flutter_bloc`.
+
+-   **Place Booking & Management**: Users can book places directly from the details screen by selecting a date. An overview of all booked places is available, with the option to cancel a booking.
+-   **Interactive Calendar View**: A dedicated calendar screen allows users to view their booked places filtered by a specific date, providing a clear visual schedule of their trips.
+-   **Favorites/Wishlist**: Users can add places to a personal list of favorites. The list is easily accessible from the user's profile screen.
+-   **Place Search**: A robust search functionality allows users to quickly find places by name.
+
+-   **Real-time Weather Widget**: Displays the current weather by consuming a custom gRPC API deployed on Google Cloud Run.
+-   **Push Notifications**: Integrated with Firebase Cloud Messaging (FCM). Notifications received while the app is in the background or terminated are handled natively by the Firebase SDK.
+-   **Dynamic Onboarding**: The onboarding flow can be dynamically controlled via Firebase Remote Config.
+-   **Theming**: Users can switch between Light and Dark mode, with their preference saved locally.
+-   **Location Services**: Utilizes the device's GPS to fetch the user's current location.
+-   **Custom Animated Navigation**: Smooth, custom page transitions for a polished UI.
 
 ## Architecture & Tech Stack
 
@@ -29,7 +29,6 @@ This project was built with scalability and maintainability in mind.
 -   **Backend-as-a-Service**: Firebase (Auth, Cloud Firestore, Firebase Storage, FCM, Remote Config).
 -   **Networking**:
     -   **gRPC**: For real-time, high-performance communication with the custom weather service.
-    -   **REST API**: [If you use any, add here, otherwise remove]
 -   **Local Storage**: `shared_preferences` for user preferences.
 -   **Routing**: Custom routing solution using `onGenerateRoute` to enable animated page transitions.
 -   **Models & Equality**: `equatable` for value equality in models and BLoC states.
@@ -66,12 +65,6 @@ To run this project locally, follow these steps:
     flutter run
     ```
 
-## Future Improvements
-
--   **Messages Tab**: Implement the real-time chat functionality.
--   **Booking Details**: [Add your thoughts on expanding the booking feature].
--   **Testing**: [Add your thoughts on adding Unit, Widget, and Integration tests].
-
 ---
 *This project was developed as part of an assignment.*
-*Designed by [Your Name] - [Link to your portfolio or LinkedIn, if you want]*
+*Designed by Mood*
