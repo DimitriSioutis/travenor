@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/features/profile/presentation/widgets/logout_dialog.dart';
 import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth/auth_event.dart';
+import '../../../auth/presentation/bloc/auth/auth_state.dart';
 import '../bloc/theme/theme_bloc.dart';
 import '../bloc/theme/theme_event.dart';
 import '../bloc/theme/theme_state.dart';
@@ -40,6 +41,17 @@ class ProfilePage extends StatelessWidget {
                       context.read<ThemeBloc>().add(ThemeChanged(themeMode: newThemeMode));
                     },
                   ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                return ProfileButton(
+                  title: 'Favorites',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/favorites_screen');
+                  },
                 );
               },
             ),

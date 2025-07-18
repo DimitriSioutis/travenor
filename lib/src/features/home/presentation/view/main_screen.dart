@@ -76,12 +76,7 @@ class _MainScreenState extends State<MainScreen> {
             children: _pages,
           ),
         ),
-        //
-        // Container(
-        //   padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        //   color: Theme.of(context).colorScheme.surface,
-        //   child: _pages[_selectedIndex],
-        // ),
+
         bottomNavigationBar: Container(
           height: 100 + MediaQuery.of(context).padding.bottom,
           padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),

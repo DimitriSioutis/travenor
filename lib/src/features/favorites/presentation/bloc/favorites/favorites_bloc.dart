@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import '../../../../places/domain/models/place.dart';
 import '../../../domain/repositories/favorites_repository.dart';
 import 'favorites_event.dart';
 import 'favorites_state.dart';
@@ -9,16 +10,16 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   FavoritesBloc({required FavoritesRepository favoritesRepository}) : _favoritesRepository = favoritesRepository, super(FavoritesInitial()) {
     on<LoadFavorites>(
       (event, emit) {
-        return emit.onEach<Set<String>>(
+        return emit.onEach<Set<Place>>(
           _favoritesRepository.getFavoritePlaces(event.userId),
-          onData: (favoriteIds) => emit(FavoritesLoaded(favoriteIds)),
+          onData: (favoritePlaces) => emit(FavoritesLoaded(favoritePlaces)),
         );
       },
     );
 
     on<AddFavorite>(
       (event, emit) {
-        _favoritesRepository.addFavorite(event.userId, event.placeId);
+        _favoritesRepository.addFavorite(event.userId, event.place);
       },
     );
     on<RemoveFavorite>(

@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../main.dart';
 
@@ -17,7 +18,7 @@ class NotificationService {
     _setupMessageHandlers();
 
     final fcmToken = await _firebaseMessaging.getToken();
-    print("Firebase FCM Token: $fcmToken");
+    debugPrint("Firebase FCM Token: $fcmToken");
   }
 
   Future<void> _initLocalNotifications() async {

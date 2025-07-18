@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../places/domain/models/place.dart';
+
 abstract class FavoritesEvent extends Equatable {
   const FavoritesEvent();
 
@@ -14,8 +16,8 @@ class LoadFavorites extends FavoritesEvent {
 
 class AddFavorite extends FavoritesEvent {
   final String userId;
-  final String placeId;
-  const AddFavorite({required this.userId, required this.placeId});
+  final Place place;
+  const AddFavorite({required this.userId, required this.place});
 }
 
 class RemoveFavorite extends FavoritesEvent {

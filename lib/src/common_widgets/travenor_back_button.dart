@@ -8,6 +8,7 @@ class TravenorBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(22),
       onTap: () => Navigator.pop(context),
       child: Container(
         height: 44,

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../extensions/color_scheme_extension.dart';
@@ -31,11 +32,10 @@ class FavoriteIconButton extends StatelessWidget {
         final authState = context.read<AuthBloc>().state;
         final userId = (authState is Authenticated) ? authState.user.uid : null;
         bool isFavorite = false;
-
         if (favoritesState is FavoritesLoaded) {
-          isFavorite = favoritesState.favoritePlaces.contains(place.id);
+          Place? currentPlace = favoritesState.favoritePlaces.firstWhereOrNull((value) => value.id == place.id);
+          isFavorite = currentPlace != null;
         }
-
         return InkWell(
           onTap: () {
             if (userId == null) {
@@ -45,13 +45,9 @@ class FavoriteIconButton extends StatelessWidget {
               return;
             }
             if (isFavorite) {
-              context.read<FavoritesBloc>().add(
-                RemoveFavorite(userId: userId, placeId: place.id),
-              );
+              context.read<FavoritesBloc>().add(RemoveFavorite(userId: userId, placeId: place.id));
             } else {
-              context.read<FavoritesBloc>().add(
-                AddFavorite(userId: userId, placeId: place.id),
-              );
+              context.read<FavoritesBloc>().add(AddFavorite(userId: userId, place: place));
             }
           },
           child: Container(

@@ -15,8 +15,7 @@ class AppTheme {
     useMaterial3: true,
     fontFamily: 'sf',
     brightness: Brightness.light,
-    // primaryColor: mainColor,
-    // scaffoldBackgroundColor: lightBgColor,
+
     textTheme: AppTextTheme.lightTextTheme,
     colorScheme: AppColorScheme.lightColorScheme,
     extensions: <ThemeExtension<dynamic>>[
@@ -33,8 +32,7 @@ class AppTheme {
     useMaterial3: true,
     fontFamily: 'sf',
     brightness: Brightness.dark,
-    // primaryColor: mainColor,
-    // scaffoldBackgroundColor: darkBgColor,
+
     textTheme: AppTextTheme.darkTextTheme,
     colorScheme: AppColorScheme.darkColorScheme,
     extensions: <ThemeExtension<dynamic>>[

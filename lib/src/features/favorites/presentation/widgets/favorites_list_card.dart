@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
-
 import '../../../../extensions/color_scheme_extension.dart';
-import '../../domain/models/booking.dart';
+import '../../../places/domain/models/place.dart';
+import 'favorite_icon_button.dart';
 
-class BookedPlaceCard extends StatelessWidget {
-  const BookedPlaceCard({super.key, required this.booking, required this.onTap});
-  final Booking booking;
+class FavoritesListCard extends StatelessWidget {
+  const FavoritesListCard({super.key, required this.place, required this.onTap});
+  final Place place;
   final VoidCallback onTap;
 
   @override
@@ -40,7 +39,7 @@ class BookedPlaceCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                      image: NetworkImage(booking.place.imageUrl),
+                      image: NetworkImage(place.imageUrl),
                       alignment: Alignment.center,
                       fit: BoxFit.cover,
                     ),
@@ -52,29 +51,19 @@ class BookedPlaceCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/calendar.svg',
-                          height: 16,
-                          width: 16,
-                        ),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: Text(
-                            DateFormat('dd MMMM yyyy').format(booking.bookedAt),
-                            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                              color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
                     Text(
-                      booking.place.name,
+                      place.name,
                       style: Theme.of(context).textTheme.titleLarge,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    Row(
+                      children: [
+                        _buildStarRating(context),
+                        Text(
+                          '${place.rating}',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ],
                     ),
                     Row(
                       children: [
@@ -82,7 +71,7 @@ class BookedPlaceCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
-                            booking.place.location,
+                            place.location,
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                               color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
                             ),
@@ -94,15 +83,21 @@ class BookedPlaceCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
-                size: 16,
+              FavoriteIconButton(
+                place: place,
+                size: 40,
+                iconSize: 25,
+                unfavoriteIcon: Icons.favorite_border,
+                favoriteIcon: Icons.favorite,
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _buildStarRating(BuildContext context) {
+    return Row(children: [for (int i = 0; i < place.rating.floor(); i++) Icon(Icons.star, color: Color(0xffFFD336), size: 15)]);
   }
 }

@@ -4,6 +4,7 @@ import 'package:travenor/src/features/home/presentation/view/main_screen.dart';
 import 'package:travenor/src/features/places/presentation/view/popular_places.dart';
 import 'package:travenor/src/features/search/presentation/view/search_screen.dart';
 import '../features/booking/presentation/view/booked_places.dart';
+import '../features/favorites/presentation/view/favorites_screen.dart';
 import '../features/places/presentation/view/place_screen.dart';
 import '../utils/error_screen.dart';
 import '../features/auth/presentation/view/forget_password_screen.dart';
@@ -29,6 +30,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case '/booked_places':
         return MaterialPageRoute(builder: (_) => const BookedPlacesScreen());
+      case '/favorites_screen':
+        return MaterialPageRoute(builder: (_) => const FavoritesScreen());
       case '/place_details':
         return MaterialPageRoute(
           builder: (_) {

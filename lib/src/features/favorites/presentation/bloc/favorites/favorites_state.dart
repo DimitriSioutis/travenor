@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../places/domain/models/place.dart';
+
 abstract class FavoritesState extends Equatable {
   const FavoritesState();
   @override
@@ -11,7 +13,7 @@ class FavoritesInitial extends FavoritesState {}
 class FavoritesLoading extends FavoritesState {}
 
 class FavoritesLoaded extends FavoritesState {
-  final Set<String> favoritePlaces;
+  final Set<Place> favoritePlaces;
   const FavoritesLoaded(this.favoritePlaces);
   @override
   List<Object?> get props => [favoritePlaces];
