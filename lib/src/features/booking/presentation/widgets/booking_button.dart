@@ -30,12 +30,6 @@ class BookingButton extends StatelessWidget {
         if (state is BookingLoaded) {
           booking = state.bookedPlaces.firstWhereOrNull((booking) => booking.place == place);
           isBooked = booking != null;
-          // isBooked = state.bookedPlaces
-          //     .map((booking) {
-          //       return booking.place == place;
-          //     })
-          //     .toList()
-          //     .contains(true);
           buttonText = booking != null ? 'Booked at ${DateFormat('dd MMMM yyyy').format(booking.bookedAt)}' : 'Book Now';
         }
         return Align(

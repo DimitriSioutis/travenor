@@ -26,6 +26,7 @@ import 'src/features/weather/data/repositories/weather_repository_impl.dart';
 import 'src/features/weather/domain/repositories/weather_repository.dart';
 import 'src/features/weather/presentation/bloc/weather_bloc.dart';
 import 'src/features/weather/presentation/bloc/weather_event.dart';
+import 'src/services/location_service.dart';
 import 'src/utils/app_bloc_observer.dart';
 import 'src/routing/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -72,7 +73,8 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<PlacesRepository>(create: (context) => PlacesRepositoryImpl()),
         RepositoryProvider<FavoritesRepository>(create: (context) => FavoritesRepositoryImpl()),
         RepositoryProvider<RemoteConfigRepository>(create: (context) => RemoteConfigRepositoryImpl()),
-        RepositoryProvider<WeatherRepository>(create: (context) => WeatherRepositoryImpl()),
+        RepositoryProvider<LocationService>(create: (context) => LocationService()),
+        RepositoryProvider<WeatherRepository>(create: (context) => WeatherRepositoryImpl(locationService: context.read<LocationService>())),
         RepositoryProvider<BookingRepository>(create: (context) => BookingRepositoryImpl()),
         RepositoryProvider<NotificationService>.value(value: notificationService),
         RepositoryProvider<SettingsRepository>.value(value: settingsRepository),
@@ -82,8 +84,16 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository: context.read<AuthRepository>())..add(CheckAuthStatus())),
           BlocProvider<FavoritesBloc>(create: (context) => FavoritesBloc(favoritesRepository: context.read<FavoritesRepository>())),
-          BlocProvider<PopularPlacesBloc>(create: (context) => PopularPlacesBloc(placesRepository: context.read<PlacesRepository>())..add(FetchPopularPlaces())),
-          BlocProvider<WeatherBloc>(create: (context) => WeatherBloc(weatherRepository: context.read<WeatherRepository>())..add(WeatherRequested())),
+          BlocProvider<PopularPlacesBloc>(
+            create: (context) => PopularPlacesBloc(
+              placesRepository: context.read<PlacesRepository>(),
+            )..add(FetchPopularPlaces()),
+          ),
+          BlocProvider<WeatherBloc>(
+            create: (context) => WeatherBloc(
+              weatherRepository: context.read<WeatherRepository>(),
+            )..add(WeatherRequested()),
+          ),
           BlocProvider<BookingBloc>(create: (context) => BookingBloc(bookingRepository: context.read<BookingRepository>())),
           BlocProvider<CalendarBloc>(create: (context) => CalendarBloc()),
           BlocProvider<ThemeBloc>(

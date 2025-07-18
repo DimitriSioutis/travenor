@@ -34,12 +34,22 @@ class WeatherWidget extends StatelessWidget {
 
   Widget buildWeatherContent(BuildContext context, WeatherState state) {
     if (state is WeatherError) {
-      return Text('Something went wrong', style: Theme.of(context).textTheme.labelLarge);
+      return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Center(
+          child: Text(
+            'To see the weather, enable location services.',
+            style: Theme.of(context).textTheme.labelLarge,
+            maxLines: 2,
+          ),
+        ),
+      );
     }
     if (state is WeatherLoading && state.weather == null) {
       return Center(
         child: SizedBox(
           height: 37,
+          width: 37,
           child: CircularProgressIndicator(
             color: Theme.of(context).colorScheme.primary,
             padding: EdgeInsets.all(4.0),

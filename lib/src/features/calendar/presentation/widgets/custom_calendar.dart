@@ -25,12 +25,10 @@ class CustomCalendar extends StatelessWidget {
           ),
         ],
       ),
-
       child: TableCalendar(
         firstDay: DateTime.utc(2020, 1, 1),
         lastDay: DateTime.utc(2030, 12, 31),
         rowHeight: 76,
-
         focusedDay: selectedDate,
         selectedDayPredicate: (day) => isSameDay(selectedDate, day),
         onDaySelected: onDaySelected,
@@ -43,18 +41,7 @@ class CustomCalendar extends StatelessWidget {
           leftChevronMargin: EdgeInsets.zero,
           rightChevronPadding: EdgeInsets.symmetric(horizontal: 16.0),
           rightChevronMargin: EdgeInsets.zero,
-          titleTextFormatter: (date, locale) {
-            String titleText = DateFormat('d MMMM').format(selectedDate);
-
-            if (DateFormat('yyyy').format(selectedDate) == DateFormat('yyyy').format(date)) {
-              if (DateFormat('MMMM').format(selectedDate) != DateFormat('MMMM').format(date)) {
-                titleText = DateFormat('MMMM').format(date);
-              }
-            } else {
-              titleText = DateFormat('MMMM yyyy').format(date);
-            }
-            return titleText;
-          },
+          titleTextFormatter: _getTittleText,
           titleTextStyle: Theme.of(context).textTheme.displayLarge!,
           titleCentered: false,
           formatButtonShowsNext: true,
@@ -115,6 +102,19 @@ class CustomCalendar extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getTittleText(date, locale) {
+    String titleText = DateFormat('d MMMM').format(selectedDate);
+
+    if (DateFormat('yyyy').format(selectedDate) == DateFormat('yyyy').format(date)) {
+      if (DateFormat('MMMM').format(selectedDate) != DateFormat('MMMM').format(date)) {
+        titleText = DateFormat('MMMM').format(date);
+      }
+    } else {
+      titleText = DateFormat('MMMM yyyy').format(date);
+    }
+    return titleText;
   }
 
   Container _buildDatePreview(DateTime day, BuildContext context, {required TextStyle dayLetterTextStyle, required TextStyle dayNumberTextStyle, Color boxColor = Colors.transparent}) {

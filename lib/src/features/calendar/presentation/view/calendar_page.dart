@@ -33,19 +33,7 @@ class CalendarPage extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<BookingBloc, BookingState>(
                   builder: (context, state) {
-                    if (state is BookingLoading) Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
-                    if (state is BookingLoaded) {
-                      final List<Booking> filteredBookings = state.bookedPlaces.where(
-                        (booking) {
-                          return DateFormat('dd MMMM yyyy').format(booking.bookedAt) == DateFormat('dd MMMM yyyy').format(selectedDate);
-                        },
-                      ).toList();
-                      if (filteredBookings.isEmpty) {
-                        return Center(child: Text('No bookings found', style: Theme.of(context).textTheme.titleLarge));
-                      }
-                      return BookedPlacesList(bookings: filteredBookings);
-                    }
-                    return Center(child: Text('Something went wrong', style: Theme.of(context).textTheme.titleLarge));
+                    return _buildBookingList(state, context, selectedDate);
                   },
                 ),
               ),
@@ -54,6 +42,22 @@ class CalendarPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _buildBookingList(BookingState state, BuildContext context, DateTime selectedDate) {
+    if (state is BookingLoading) Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
+    if (state is BookingLoaded) {
+      final List<Booking> filteredBookings = state.bookedPlaces.where(
+        (booking) {
+          return DateFormat('dd MMMM yyyy').format(booking.bookedAt) == DateFormat('dd MMMM yyyy').format(selectedDate);
+        },
+      ).toList();
+      if (filteredBookings.isEmpty) {
+        return Center(child: Text('No bookings found', style: Theme.of(context).textTheme.titleLarge));
+      }
+      return BookedPlacesList(bookings: filteredBookings);
+    }
+    return Center(child: Text('Something went wrong', style: Theme.of(context).textTheme.titleLarge));
   }
 
   Widget _buildListHeader(BuildContext context) {

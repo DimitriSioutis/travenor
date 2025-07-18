@@ -37,15 +37,7 @@ class BookedPlacesScreen extends StatelessWidget {
             Expanded(
               child: BlocBuilder<BookingBloc, BookingState>(
                 builder: (context, state) {
-                  if (state is BookingLoading) Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
-                  if (state is BookingLoaded) {
-                    final List<Booking> filteredBookings = state.bookedPlaces.toList();
-                    if (filteredBookings.isEmpty) {
-                      return Center(child: Text('No bookings found', style: Theme.of(context).textTheme.titleLarge));
-                    }
-                    return BookedPlacesList(bookings: filteredBookings);
-                  }
-                  return Center(child: Text('Something went wrong', style: Theme.of(context).textTheme.titleLarge));
+                  return _buildBookingList(state, context);
                 },
               ),
             ),
@@ -53,5 +45,17 @@ class BookedPlacesScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildBookingList(BookingState state, BuildContext context) {
+    if (state is BookingLoading) Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
+    if (state is BookingLoaded) {
+      final List<Booking> filteredBookings = state.bookedPlaces.toList();
+      if (filteredBookings.isEmpty) {
+        return Center(child: Text('No bookings found', style: Theme.of(context).textTheme.titleLarge));
+      }
+      return BookedPlacesList(bookings: filteredBookings);
+    }
+    return Center(child: Text('Something went wrong', style: Theme.of(context).textTheme.titleLarge));
   }
 }

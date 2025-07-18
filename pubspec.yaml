@@ -30,6 +30,7 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   grpc: ^4.1.0
   protobuf: ^4.1.1
+  geolocator: ^14.0.2
   table_calendar: ^3.2.0
   collection: ^1.19.1
   shared_preferences: ^2.5.3

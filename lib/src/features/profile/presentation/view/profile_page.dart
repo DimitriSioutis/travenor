@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 20),
             BlocBuilder<ThemeBloc, ThemeState>(
               builder: (context, state) {
-                final isDarkMode = state.themeMode == ThemeMode.dark;
+                final isDarkMode = state.themeMode == ThemeMode.dark || (state.themeMode == ThemeMode.system && MediaQuery.of(context).platformBrightness == Brightness.dark);
                 return ProfileButton(
                   title: 'Change Theme',
                   rightWidget: Switch(

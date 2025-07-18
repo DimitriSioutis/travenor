@@ -7,14 +7,14 @@ class SettingsRepositoryImpl implements SettingsRepository {
 
   @override
   Future<void> saveThemeMode(ThemeMode themeMode) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_themeKey, themeMode.index);
+    final sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setInt(_themeKey, themeMode.index);
   }
 
   @override
   Future<ThemeMode> loadThemeMode() async {
-    final prefs = await SharedPreferences.getInstance();
-    final themeIndex = prefs.getInt(_themeKey);
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final themeIndex = sharedPreferences.getInt(_themeKey);
 
     if (themeIndex == null) {
       return ThemeMode.system;
