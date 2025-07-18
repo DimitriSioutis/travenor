@@ -5,10 +5,16 @@ class GeneralButton extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.buttonText,
+    this.textStyle,
+    this.buttonColor,
+    this.borderColor,
   });
 
   final VoidCallback onTap;
   final String buttonText;
+  final TextStyle? textStyle;
+  final Color? buttonColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +26,23 @@ class GeneralButton extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: buttonColor ?? Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(14),
+          border: borderColor != null
+              ? Border.all(
+                  color: borderColor!,
+                  width: 2,
+                )
+              : null,
         ),
         alignment: Alignment.center,
         child: Text(
           buttonText,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
+          style:
+              textStyle ??
+              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
       ),
     );

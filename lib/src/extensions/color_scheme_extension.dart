@@ -8,7 +8,7 @@ class CustomColorsExtension extends ThemeExtension<CustomColorsExtension> {
 
   @override
   CustomColorsExtension copyWith({Color? secondaryOnSurface, Color? fadeButton}) {
-    return CustomColorsExtension(onSurfaceSecondary: secondaryOnSurface ?? this.onSurfaceBlock, onSurfaceBlock: fadeButton ?? this.onSurfaceBlock);
+    return CustomColorsExtension(onSurfaceSecondary: secondaryOnSurface ?? onSurfaceBlock, onSurfaceBlock: fadeButton ?? onSurfaceBlock);
   }
 
   @override

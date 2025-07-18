@@ -1,5 +1,4 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/material.dart';
 import 'package:travenor/src/features/onboarding/domain/models/onboarding_page.dart';
 import '../../domain/repositories/remote_config_repository.dart';
 

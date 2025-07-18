@@ -14,7 +14,6 @@ class AuthLoading extends AuthState {}
 
 class Authenticated extends AuthState {
   final TravenorUser user;
-
   const Authenticated(this.user);
 
   @override

@@ -8,6 +8,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
 
   AuthBloc({required AuthRepository authRepository}) : _authRepository = authRepository, super(Unauthenticated()) {
+    on<CheckAuthStatus>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        final user = await _authRepository.getCurrentUser();
+        if (user != null) {
+          emit(Authenticated(user));
+        } else {
+          emit(Unauthenticated());
+        }
+      } catch (e) {
+        emit(Unauthenticated());
+      }
+    });
+
     on<SignInRequested>((event, emit) async {
       emit(AuthLoading());
       try {

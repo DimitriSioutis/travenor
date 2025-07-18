@@ -44,6 +44,26 @@ class PlaceModel {
     );
   }
 
+  factory PlaceModel.fromMap(Map<String, dynamic> data) {
+    List<String> images = [];
+    if (data['images'] != null) {
+      for (String image in data['images']) {
+        images.add(image);
+      }
+    }
+
+    return PlaceModel(
+      id: data['id'],
+      name: data['name'] ?? '',
+      location: data['location'] ?? '',
+      rating: (data['rating'] as num?)?.toDouble() ?? 0.0,
+      imageUrl: data['imageUrl'] ?? '',
+      description: data['description'] ?? '',
+      price: (data['price'] as num?)?.toInt() ?? 0,
+      images: images,
+    );
+  }
+
   Place toDomain() {
     return Place(
       id: id,

@@ -5,8 +5,8 @@ import '../bloc/popular_places/popular_places_bloc.dart';
 import '../bloc/popular_places/popular_places_state.dart';
 import '../widgets/place_grid_card_popular.dart';
 
-class PopularPlaces extends StatelessWidget {
-  const PopularPlaces({super.key});
+class PopularPlacesScreen extends StatelessWidget {
+  const PopularPlacesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class PopularPlaces extends StatelessWidget {
                   'Popular Places',
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                const SizedBox(),
+                const SizedBox(width: 44),
               ],
             ),
             const SizedBox(height: 40),

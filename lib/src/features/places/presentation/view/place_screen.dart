@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travenor/src/common_widgets/general_button.dart';
+import 'package:travenor/src/features/booking/presentation/widgets/booking_button.dart';
 import '../../../../common_widgets/travenor_back_button.dart';
 import '../../../favorites/presentation/widgets/favorite_icon_button.dart';
 import '../../domain/repositories/places_repository.dart';
@@ -40,13 +40,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
                   _buildBackgroundImage(context, place),
                   _buildTopBar(context, place),
                   PlaceDetailsPanel(place: place),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: MediaQuery.of(context).padding.bottom + 10),
-                      child: GeneralButton(onTap: () {}, buttonText: 'Book Now'),
-                    ),
-                  ),
+                  BookingButton(place: place),
                 ],
               );
             }

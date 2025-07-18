@@ -66,4 +66,17 @@ class AuthRepositoryImpl implements AuthRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<TravenorUser?> getCurrentUser() async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    if (firebaseUser == null) {
+      return null;
+    }
+    try {
+      return await getTravenorUser(firebaseUser.uid);
+    } catch (e) {
+      return null;
+    }
+  }
 }

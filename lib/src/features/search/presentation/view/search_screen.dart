@@ -38,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTopBar(context),
-                  SizedBox(height: 20),
+                  SizedBox(height: 40),
                   _buildSearchTextField(context),
                   SizedBox(height: 20),
                   Text(

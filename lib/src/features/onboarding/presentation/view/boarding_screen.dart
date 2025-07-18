@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travenor/src/features/onboarding/domain/models/onboarding_page.dart';
 import 'package:travenor/src/features/onboarding/domain/repositories/remote_config_repository.dart';
+import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
+import '../../../auth/presentation/bloc/auth/auth_state.dart';
 import '../bloc/remote_config_bloc.dart';
 import '../../../../common_widgets/general_button.dart';
 import '../bloc/remote_config_event.dart';
@@ -28,7 +30,14 @@ class _BoardingScreenState extends State<BoardingScreen> {
         body: BlocConsumer<RemoteConfigBloc, RemoteConfigState>(
           listener: (context, state) {
             if (state is RemoteConfigSuccess) {
-              if (state.infoList.isEmpty) Navigator.pushReplacementNamed(context, '/login');
+              if (state.infoList.isEmpty) {
+                final authState = context.read<AuthBloc>().state;
+                if (authState is Authenticated) {
+                  Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+                } else {
+                  Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                }
+              }
             }
           },
           builder: (context, state) {
@@ -66,7 +75,12 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       buttonText: _currentPageIndex == 0 ? 'Get Started' : 'Next',
                       onTap: () {
                         if (_currentPageIndex == infoList.length - 1) {
-                          Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                          final authState = context.read<AuthBloc>().state;
+                          if (authState is Authenticated) {
+                            Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+                          } else {
+                            Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                          }
                         } else {
                           _pageController.nextPage(
                             duration: const Duration(milliseconds: 300),

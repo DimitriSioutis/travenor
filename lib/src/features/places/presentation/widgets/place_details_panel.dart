@@ -197,6 +197,7 @@ class PlaceDetailsPanel extends StatelessWidget {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
+                height: 1.7,
                 color: Theme.of(context).extension<CustomColorsExtension>()!.onSurfaceSecondary,
               ),
               moreStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
