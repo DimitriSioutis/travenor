@@ -9,9 +9,8 @@ class BookedPlacesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.zero,
       itemCount: bookings.length,
-      clipBehavior: Clip.none,
+      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0 + MediaQuery.of(context).padding.bottom),
       itemBuilder: (context, index) {
         final booking = bookings.elementAt(index);
         return Padding(

@@ -12,27 +12,35 @@ class PopularPlacesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
+        padding: EdgeInsets.only(top: 20 + MediaQuery.of(context).padding.top),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TravenorBackButton(),
-                Text(
-                  'Popular Places',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                const SizedBox(width: 44),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TravenorBackButton(),
+                      Text(
+                        'Popular Places',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                      const SizedBox(width: 44),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  Text(
+                    'All Popular Places',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 40),
-            Text(
-              'All Popular Places',
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(height: 20),
+
             Expanded(
               child: BlocBuilder<PopularPlacesBloc, PopularPlacesState>(
                 builder: (context, state) {
@@ -42,8 +50,7 @@ class PopularPlacesScreen extends StatelessWidget {
                   if (state is PopularPlacesLoaded) {
                     return GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 161 / 238, crossAxisSpacing: 14, mainAxisSpacing: 14),
-                      clipBehavior: Clip.none,
-                      padding: EdgeInsets.zero,
+                      padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0 + MediaQuery.of(context).padding.bottom),
                       itemCount: state.places.length,
                       itemBuilder: (context, index) {
                         final place = state.places[index];

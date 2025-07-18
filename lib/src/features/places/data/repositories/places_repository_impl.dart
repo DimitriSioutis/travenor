@@ -21,7 +21,12 @@ class PlacesRepositoryImpl implements PlacesRepository {
   @override
   Future<List<Place>> searchPlaces({required String query}) async {
     try {
-      final querySnapshot = await _firestore.collection('places').where('name', isGreaterThanOrEqualTo: query).where('name', isLessThanOrEqualTo: '$query\uf8ff').limit(20).get();
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot;
+      if (query.isEmpty) {
+        querySnapshot = await _firestore.collection('places').limit(10).get();
+      } else {
+        querySnapshot = await _firestore.collection('places').where('name', isGreaterThanOrEqualTo: query).where('name', isLessThanOrEqualTo: '$query\uf8ff').limit(20).get();
+      }
       List<Place> places = querySnapshot.docs.map((rawPlace) => PlaceModel.fromSnapshot(rawPlace).toDomain()).toList();
       return places;
     } catch (e) {

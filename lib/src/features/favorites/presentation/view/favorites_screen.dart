@@ -13,32 +13,37 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TravenorBackButton(),
-                Text(
-                  'Favorite Places',
-                  style: Theme.of(context).textTheme.headlineLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TravenorBackButton(),
+                    Text(
+                      'Favorite Places',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                    const SizedBox(width: 44),
+                  ],
                 ),
-                const SizedBox(width: 44),
+                const SizedBox(height: 20),
               ],
             ),
-            const SizedBox(height: 40),
-            Expanded(
-              child: BlocBuilder<FavoritesBloc, FavoritesState>(
-                builder: (context, state) {
-                  return _buildFavoritesList(state, context);
-                },
-              ),
+          ),
+          Expanded(
+            child: BlocBuilder<FavoritesBloc, FavoritesState>(
+              builder: (context, state) {
+                return _buildFavoritesList(state, context);
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

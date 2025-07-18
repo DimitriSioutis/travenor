@@ -12,37 +12,43 @@ class BookedPlacesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TravenorBackButton(),
-                Text(
-                  'Booked Places',
-                  style: Theme.of(context).textTheme.headlineLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TravenorBackButton(),
+                    Text(
+                      'Booked Places',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                    const SizedBox(width: 44),
+                  ],
                 ),
-                const SizedBox(width: 44),
+                const SizedBox(height: 40),
+                Text(
+                  'All Booked Places',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(height: 20),
               ],
             ),
-            const SizedBox(height: 40),
-            Text(
-              'All Booked Places',
-              style: Theme.of(context).textTheme.displaySmall,
+          ),
+
+          Expanded(
+            child: BlocBuilder<BookingBloc, BookingState>(
+              builder: (context, state) {
+                return _buildBookingList(state, context);
+              },
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: BlocBuilder<BookingBloc, BookingState>(
-                builder: (context, state) {
-                  return _buildBookingList(state, context);
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -9,9 +9,8 @@ class FavoritesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0 + MediaQuery.of(context).padding.bottom),
       itemCount: places.length,
-      clipBehavior: Clip.none,
       itemBuilder: (context, index) {
         final place = places.elementAt(index);
         return Padding(

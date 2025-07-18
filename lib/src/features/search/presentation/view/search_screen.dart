@@ -32,23 +32,27 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Scaffold(
         body: BlocBuilder<SearchPlacesBloc, SearchPlacesState>(
           builder: (context, state) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildTopBar(context),
-                  SizedBox(height: 40),
-                  _buildSearchTextField(context),
-                  SizedBox(height: 20),
-                  Text(
-                    'All Popular Places',
-                    style: Theme.of(context).textTheme.displaySmall,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20 + MediaQuery.of(context).padding.top, 20, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildTopBar(context),
+                      SizedBox(height: 40),
+                      _buildSearchTextField(context),
+                      SizedBox(height: 20),
+                      Text(
+                        'All Popular Places',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20),
-                  _buildSearchPlacesList(state, context),
-                ],
-              ),
+                ),
+                _buildSearchPlacesList(state, context),
+              ],
             );
           },
         ),
@@ -117,8 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return Expanded(
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 161 / 216, crossAxisSpacing: 14, mainAxisSpacing: 14),
-          clipBehavior: Clip.none,
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0 + MediaQuery.of(context).padding.bottom),
           itemCount: state.places.length,
           itemBuilder: (context, index) {
             final place = state.places[index];

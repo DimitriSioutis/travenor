@@ -42,12 +42,12 @@ class HomePage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 2,
-        padding: EdgeInsets.symmetric(vertical: 25),
+        itemCount: 3,
+        padding: EdgeInsets.only(top: 10, bottom: 25),
         itemBuilder: (context, index) {
           final place = places[index];
           return Padding(
-            padding: EdgeInsets.only(left: index == 0 ? 20 : 10.0, right: index == 1 ? 20 : 10.0),
+            padding: EdgeInsets.only(left: index == 0 ? 20 : 10.0, right: index == 2 ? 20 : 10.0),
             child: PopularPlacesHorizontalListCard(
               place: place,
               onTap: () {

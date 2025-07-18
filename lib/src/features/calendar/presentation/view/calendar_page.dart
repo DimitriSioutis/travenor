@@ -15,32 +15,37 @@ class CalendarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: BlocBuilder<CalendarBloc, CalendarState>(
-        builder: (context, state) {
-          final selectedDate = state.selectedDate;
-          return Column(
-            children: [
-              CustomCalendar(
-                selectedDate: selectedDate,
-                onDaySelected: (selectedDay, focusedDay) {
-                  context.read<CalendarBloc>().add(DateSelected(selectedDay));
+    return BlocBuilder<CalendarBloc, CalendarState>(
+      builder: (context, state) {
+        final selectedDate = state.selectedDate;
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: [
+                  CustomCalendar(
+                    selectedDate: selectedDate,
+                    onDaySelected: (selectedDay, focusedDay) {
+                      context.read<CalendarBloc>().add(DateSelected(selectedDay));
+                    },
+                  ),
+                  const SizedBox(height: 40),
+                  _buildListHeader(context),
+                ],
+              ),
+            ),
+
+            Expanded(
+              child: BlocBuilder<BookingBloc, BookingState>(
+                builder: (context, state) {
+                  return _buildBookingList(state, context, selectedDate);
                 },
               ),
-              const SizedBox(height: 40),
-              _buildListHeader(context),
-              Expanded(
-                child: BlocBuilder<BookingBloc, BookingState>(
-                  builder: (context, state) {
-                    return _buildBookingList(state, context, selectedDate);
-                  },
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 
